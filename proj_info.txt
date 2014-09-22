@@ -1,0 +1,5 @@
+Topic - Restaurant Recommendation System using multiple data sources
+
+Description - 
+The system provides restaurant recommendations based on user's search criterias such as user mood, location, cuisine, rating, cost preferences etc. 
+The System uses multiple open source API's for data such as Yelp, Hoppit, Google Maps, Boorah.
