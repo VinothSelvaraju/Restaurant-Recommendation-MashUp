@@ -1,0 +1,17 @@
+Design Document:
+
+Title
+Participants
+Introduction
+  Context and motivation
+  Problems to be addressed
+  
+Technical contribution
+  Basic ideas
+  Approach
+Implementation issues
+  Data Sources
+  User interface
+  Hardware and software platforms
+  
+Bibliography
