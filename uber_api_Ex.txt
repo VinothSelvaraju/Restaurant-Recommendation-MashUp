@@ -1,0 +1,68 @@
+
+Sample Uber API-calls:-
+
+1. 
+curl -H 'Authorization: Token ottJav45V1ZXaH0sH8bgMVaYc_Qzkc95Ee0LqhBH' \
+'https://api.uber.com/v1/products?latitude=37.7759792&longitude=-122.41823'
+
+Response:-
+{"products":
+[{"capacity":4,"image":"http:\/\/d1a3f4spazzrp4.cloudfront.net\/car-types\/mono\/mono-uberx.png","display_name":"uberX","product_id":"b8e5c464-5de2-4539-a35a-986d6e58f186","description":"The Low Cost Uber"},
+
+{"capacity":6,"image":"http:\/\/d1a3f4spazzrp4.cloudfront.net\/car-types\/mono\/mono-uberxl2.png","display_name":"uberXL","product_id":"1e0ce2df-4a1e-4333-86dd-dc0c67aaabe1","description":"low-cost rides for large groups"},{"capacity":4,"image":"http:\/\/d1a3f4spazzrp4.cloudfront.net\/car-types\/mono\/mono-black.png","display_name":"UberBLACK","product_id":"0e9d8dd3-ffec-4c2b-9714-537e6174bb88","description":"The original Uber"},
+
+{"capacity":6,"image":"http:\/\/d1a3f4spazzrp4.cloudfront.net\/car-types\/mono\/mono-suv.png","display_name":"UberSUV","product_id":"56487469-0d3d-4f19-b662-234b7576a562","description":"Room for everyone"},
+
+{"capacity":1,"image":"http:\/\/d1a3f4spazzrp4.cloudfront.net\/car-types\/mono\/mono-nytaxi4.png","display_name":"uberT","product_id":"ebe413ab-cf49-465f-8564-a71119bfa449","description":"Taxi and Boro-Taxi without the hassle"}
+]}
+
+
+
+
+2. 
+curl -H 'Authorization: Token ottJav45V1ZXaH0sH8bgMVaYc_Qzkc95Ee0LqhBH' \
+'https://api.uber.com/v1/estimates/price?start_latitude=40.7127&start_longitude=-74.0059&end_latitude=40.7903&end_longitude=-73.9597'
+
+Input:-
+start_latitude
+start_longitude
+end_latitude
+end_longitude
+
+Sample response Response for NYC:-
+{"prices":[
+{"localized_display_name":"uberX","low_estimate":"25","display_name":"uberX","product_id":"b8e5c464-5de2-4539-a35a-986d6e58f186","surge_multiplier":1.0,"estimate":"$25-34","high_estimate":"34","currency_code":"USD"},
+{"localized_display_name":"uberXL","low_estimate":"39","display_name":"uberXL","product_id":"1e0ce2df-4a1e-4333-86dd-dc0c67aaabe1","surge_multiplier":1.0,"estimate":"$39-51","high_estimate":"51","currency_code":"USD"},
+{"localized_display_name":"UberBLACK","low_estimate":"46","display_name":"UberBLACK","product_id":"0e9d8dd3-ffec-4c2b-9714-537e6174bb88","surge_multiplier":1.0,"estimate":"$46-59","high_estimate":"59","currency_code":"USD"},
+{"localized_display_name":"UberSUV","low_estimate":"61","display_name":"UberSUV","product_id":"56487469-0d3d-4f19-b662-234b7576a562","surge_multiplier":1.0,"estimate":"$61-77","high_estimate":"77","currency_code":"USD"},
+{"localized_display_name":"uberT","low_estimate":null,"display_name":"uberT","product_id":"ebe413ab-cf49-465f-8564-a71119bfa449","surge_multiplier":1.0,"estimate":"Metered","high_estimate":null,"currency_code":null}]}
+
+
+
+3. 
+curl -H 'Authorization: Token ottJav45V1ZXaH0sH8bgMVaYc_Qzkc95Ee0LqhBH' \
+'https://api.uber.com/v1/estimates/time?start_latitude=40.7127&start_longitude=-74.0059'
+
+Input:-
+start_latitude
+start_longitude
+customer_uuid (optional)
+product_id (optional)
+
+Sample response for NYC:-
+{"times":[
+{"localized_display_name":"uberX","estimate":327,"display_name":"uberX","product_id":"b8e5c464-5de2-4539-a35a-986d6e58f186"},
+{"localized_display_name":"uberXL","estimate":425,"display_name":"uberXL","product_id":"1e0ce2df-4a1e-4333-86dd-dc0c67aaabe1"},
+{"localized_display_name":"UberBLACK","estimate":86,"display_name":"UberBLACK","product_id":"0e9d8dd3-ffec-4c2b-9714-537e6174bb88"},
+{"localized_display_name":"UberSUV","estimate":86,"display_name":"UberSUV","product_id":"56487469-0d3d-4f19-b662-234b7576a562"}]}
+
+
+
+API details:-
+
+CLIENT ID
+e-tR1AM5dZrhAD6LBJ8EcW1XmBugoLWi
+SERVER TOKEN
+ottJav45V1ZXaH0sH8bgMVaYc_Qzkc95Ee0LqhBH
+SECRET
+gszpUeSlTSjx1trA9Cy2Wd0NwjypiWGBqOsjCPmR
