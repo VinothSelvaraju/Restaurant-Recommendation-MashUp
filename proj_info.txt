@@ -1,5 +1,26 @@
 Topic - Restaurant Recommendation System using multiple data sources
 
-Description - 
+Description (draft)- 
 The system provides restaurant recommendations based on user's search criterias such as user mood, location, cuisine, rating, cost preferences etc. 
 The System uses multiple open source API's for data such as Yelp, Hoppit, Google Maps, Boorah.
+
+
+
+
+Description:-
+Restaurant recommendation system coupled with transportation service that provides smart results for user's query based on location, cuisine, rating, cost preferences, capacity etc. More details on the system can be found below,
+
+API_used:
+1. Yelp
+2. Google Maps
+3. Google Places
+4. Uber
+
+Features:
+1. List of custom ranked Restaurants for user's query (Ranking is based on results from Google places & Yelp with specific weight based on our algorithm)
+2. Result displayed in a map with pointers for user's current location and the query result
+3. More detail on each query result such as 
+	-> Restaurant address, ratings, cost, Deals/offers
+	-> Public transport service availability/details for the selected restaurant
+	-> Uber taxi service for the selected restaurant - Types of UBER taxis available with capacity, Time est. for the taxi arrival at the start place, price range for each Uber taxi types
+	-> Near by attractions around the selected restaurant
