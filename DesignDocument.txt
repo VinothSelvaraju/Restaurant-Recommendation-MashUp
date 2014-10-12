@@ -1,19 +1,30 @@
 Design Document:
 
 Title
+
 Participants
+
 Introduction
   Context and motivation
+
   Problems to be addressed
-  	- With the advacement of computer and software technologies, it's quite easy to find out choices for a dinner. However, there's no single system where we can get all information required for the whole event. We use Yelp/Google to find list of restaurant nearby or to read review about the restaurant, and use different system such as Google Maps/Uber to look for directions and transporation services. We are trying to develop an innovative system where user can look up in one single system to get all detail to plan a dinner/lunch. 
+  	With the advacement of computer and software technologies, it's quite easy to find out choices for a dinner. However, there's no single system where we can get all information required for the whole event. We use Yelp/Google to find list of restaurant nearby or to read review about the restaurant, and use different system such as Google Maps/Uber to look for directions and transporation services. We are trying to develop an innovative system where user can look up in one single system to get all detail to plan a dinner/lunch. 
   
 Technical contribution
-  Basic ideas
-  Approach
+  Basic ideas:
+  	The basic idea of the System is provide restaurant and taxi/public transport recommendations based on user's query and be able tp dynamically
+  	modify the results based on filter criterias. The system is a web application that takes input from User in the form of free text and returns a list of restaurants based on the Yelp and Google data. The application ranks the output based on a custom ranking algorithm by assigning weights on different data. Additionally, the results are shown on a map with pointers based on geometric co-ordinates. 
+  	The application provides abundant amount useful details in single system such as address, contact phone number, cuisine, rating, review count, deals, pictures, geometric co-ordinates, list of available Uber taxis, expected time to get the taxi, price estimate for the entire travel, directions, public transit etc for selected query result.
+  	The the general idea has been plot as a block diagram as shown below,
+  	<attach Block diagram here>
+ 
+  Approach: (Adithya)
+  	- Intro
+  	1. Ranking - combination of yelp rating and google places review (Weight)
+  	2. Maps - dynamically changing map pointers based on user's modification on the sort field
 
 Implementation issues
-
-  Data Sources
+  Data Sources:
   		The systems utilizes data from multiple data sources through Web services. The following Web services API are used in the project,
   		1. Uber API
   			- Populate list of available Uber taxis at a particular location based on geometric co-ordinates
@@ -24,7 +35,7 @@ Implementation issues
   			- Populate more details on each result such as address/contact/cuisine/rating/review count/deals/geometric co-ordinates etc.
   			- Sort results based on ratings/distance
 		3. Google Maps API
-			- Populate dynamic map with poiinters for search results
+			- Populate dynamic map with pointers for search results
 			- Provide directions from start to end locations for each query result
 		4. Google Places API
 			- Retrieve details such as reviews, ratings, photo etc. for query result
@@ -34,8 +45,8 @@ Implementation issues
 		
 		Detailed information on the API's that will be used in the system is collected and desribed as a matrix below,
 
-  User interface
+  User interface:
   	- Shiyam
-  Hardware and software platforms
+  Hardware and software platforms:
   	- Adithya
 Bibliography
