@@ -36,14 +36,13 @@ Implementation issues
   			- Sort results based on ratings/distance
 		3. Google Maps API
 			- Populate dynamic map with pointers for search results
-			- Provide directions from start to end locations for each query result
+			- Retrieve public transit info such as directions, public trasit details (next and future), time estimate etc. based on start and stop locations
 		4. Google Places API
 			- Retrieve details such as reviews, ratings, photo etc. for query result
 			- Near by suggestions based on the selected query result 
-		5. Google directions API
-			- Retrieve public transit info such as route, public trasit details (next and future), time estimate etc. based on start and stop locations
-		
+			
 		Detailed information on the API's that will be used in the system is collected and desribed as a matrix below,
+		<attach matrix here!>
 
   User interface:
   	- Shiyam
