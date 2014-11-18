@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: ub.cse636.project.AppTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec
+=======
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec
+>>>>>>> 11979ba78dd020e082c5807b20ce6098f23fd7fe
