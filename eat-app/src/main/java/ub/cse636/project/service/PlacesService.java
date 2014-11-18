@@ -1,8 +1,11 @@
 package ub.cse636.project.service;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import ub.cse636.project.Place;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,7 +17,7 @@ import java.util.ArrayList;
 
 
 public class PlacesService{
-    private static final String LOG_TAG = "ExampleApp";
+    
     private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
     private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
     private static final String TYPE_DETAILS = "/details";
@@ -26,28 +29,67 @@ public class PlacesService{
     private static final String API_KEY = "AIzaSyBqxv1mclccpXKSqBRaVuev_F2FOXpMuC8";
 
     //parseJSON
-    public static void parseJSON(String s){
+    public static ArrayList<Place> parseJSON(String s){
+        ArrayList<Place> placeList = null;
         if(s != null){
+            placeList = new ArrayList<Place>();
+        
+            JSONParser parser = new JSONParser();
             try{
-                JSONObject jObject = new JSONObject(s);
-                JSONObject firstJSONObj = jObject.getJSONObject("formatted_address");
-
-                System.out.println(firstJSONObj.toString());
-               
-          }catch(JSONException je){
-                System.out.println("JSON exception raised");
-                je.printStackTrace();
-          }
-
+                Object obj = parser.parse(s);
+                JSONObject jsonObject = (JSONObject) obj;
+                JSONArray results = (JSONArray) jsonObject.get("results");
+                
+                for(int i=0;i<results.size();i++){
+                    
+                    JSONObject jsonObject1 = (JSONObject) results.get(i);
+                    String name = (String) jsonObject1.get("name");
+                    String address = (String) jsonObject1.get("formatted_address");
+                    
+                    //Rating doesn't always available in the api; sometime long is returned; converts long to double
+                    Object ratingObj = jsonObject1.get("rating");
+                    Double rating = null;
+                    if(ratingObj != null){
+                        if(ratingObj instanceof Long){
+                            Long longRating = (Long) ratingObj;
+                            rating = Double.parseDouble(longRating.toString());
+                        }
+                        else if(ratingObj instanceof Double){
+                            rating = (Double) ratingObj;
+                        }
+                    }
+                    
+                    JSONObject jsonGeometryObject = (JSONObject) jsonObject1.get("geometry");
+                    JSONObject jsonLocationObject = (JSONObject) jsonGeometryObject.get("location");
+                    double lattitude = (Double) jsonLocationObject.get("lat");
+                    double longitude = (Double) jsonLocationObject.get("lng");
+                    
+                    //create the place object after parsing from json text - name/address/geo-coordinates
+                    Place place = new Place();
+                    place.setName(name);
+                    place.setAddress(address);
+                    if(rating != null){
+                       place.setRating(rating); 
+                    }
+                    place.setGeoCoordinates(lattitude,longitude);
+                    
+                    //Add to the output list
+                    placeList.add(place);
+                }
+            }
+            catch(ParseException e){
+                e.printStackTrace();
+            }
         }
+        return placeList;
     }
 
     //Text search service
-    public static void textSearch(String input) {
-        // ArrayList<Place> resultList = null;
+    public static  ArrayList<Place> textSearch(String input) {
+        ArrayList<Place> resultList = null;
         String query = input.replace(" ","+").trim();
 
-        System.out.println("Processed query: " + query);
+        // System.out.println("Processed query: " + query);
 
         HttpURLConnection conn = null;
         StringBuilder jsonResults = new StringBuilder();
@@ -59,7 +101,7 @@ public class PlacesService{
             sb.append("?query=" + query);
             sb.append("&key=" + API_KEY);
             
-            System.out.println("formed URL :" + sb.toString());
+            // System.out.println("formed URL :" + sb.toString());
            
             URL url = new URL(sb.toString());
             conn = (HttpURLConnection) url.openConnection();
@@ -71,20 +113,17 @@ public class PlacesService{
                 jsonResults.append(buff, 0, read);
             }
 
-            System.out.println("Result: ");
-            System.out.println(jsonResults.toString());
+            resultList = parseJSON(jsonResults.toString());
 
         } catch (MalformedURLException e) {
-            // Log.e(LOG_TAG, "Error processing Places API URL", e);
-           
+            e.printStackTrace();
         } catch (IOException e) {
-            // Log.e(LOG_TAG, "Error connecting to Places API", e);
-            
+             e.printStackTrace();
         } finally {
             if (conn != null) {
                 conn.disconnect();
             }
         }
-
+        return resultList;
     }
 }
