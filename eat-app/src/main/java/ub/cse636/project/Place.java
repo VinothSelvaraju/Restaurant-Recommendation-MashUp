@@ -26,7 +26,7 @@ public class Place{
 	private Double rating;
 
 	//first element - lattitude; second element - longitude
-	private final double[] geoCoordinates = new double[2];
+	private final Double[] geoCoordinates = new Double[2];
 
 	public void setName(String name){
 		this.name = name;
@@ -41,7 +41,7 @@ public class Place{
 	public void setRating(Double rating){
 		this.rating = rating;
 	}
-	public void setGeoCoordinates(double lattitude, double longitude){
+	public void setGeoCoordinates(Double lattitude, Double longitude){
 		geoCoordinates[0] = lattitude;
 		geoCoordinates[1] = longitude;
 	}
@@ -55,17 +55,19 @@ public class Place{
 	public int getPlaceId(){
 		return placeId;
 	}
-	public double getLattitude(){
+	public Double getLattitude(){
+		double out = 0;
 		if(geoCoordinates.length >= 1){
 			return geoCoordinates[0];
 		}
-		return -1;
+		return out;
 	}
-	public double getLongitude(){
+	public Double getLongitude(){
+		double out = 0;
 		if(geoCoordinates.length == 2){
 			return geoCoordinates[1];
 		}
-		return -1;
+		return out;
 	}
 	public Double getRating(){
 		return rating;
