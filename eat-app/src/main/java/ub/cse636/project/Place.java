@@ -24,6 +24,7 @@ public class Place{
 	private String address;
 	private int placeId;
 	private Double rating;
+	private int reviewCount;
 
 	//first element - lattitude; second element - longitude
 	private final double[] geoCoordinates = new double[2];
@@ -45,7 +46,12 @@ public class Place{
 		geoCoordinates[0] = lattitude;
 		geoCoordinates[1] = longitude;
 	}
-
+	
+	public void setReviewCount(int a)
+	{
+		this.reviewCount = a;
+	}
+	
 	public String getName(){
 		return name;
 	}
@@ -69,5 +75,8 @@ public class Place{
 	}
 	public Double getRating(){
 		return rating;
+	}
+	public int getReviewCount(){
+		return reviewCount;
 	}
 }
