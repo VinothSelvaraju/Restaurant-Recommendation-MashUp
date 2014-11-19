@@ -1,0 +1,283 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] Using the builder org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder with a thread count of 1
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building eat-app 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] >>> exec-maven-plugin:1.2.1:java (default-cli) @ eat-app >>>
+[INFO] 
+[INFO] <<< exec-maven-plugin:1.2.1:java (default-cli) @ eat-app <<<
+[INFO] 
+[INFO] --- exec-maven-plugin:1.2.1:java (default-cli) @ eat-app ---
+Printing conents of List
+list size : 20
+Cantina Loco
+191 Allen St, Buffalo, NY 14201, United States
+3.9
+42.899664
+-78.876975
+------------------------
+Gramma Mora's Mexican Restaurant
+1465 Hertel Ave, Buffalo, NY 14216, United States
+2.3
+42.947488
+-78.853874
+------------------------
+Chipotle Mexican Grill
+1717 Walden Ave, Cheektowaga, NY 14225, United States
+4.5
+42.907552
+-78.774114
+------------------------
+Mighty Taco
+2363 Delaware Ave, Buffalo, NY 14216, United States
+4.0
+42.948951
+-78.868158
+------------------------
+El Palenque Mexican Grill
+951 Niagara Falls Blvd, Buffalo, NY 14226, United States
+3.9
+42.980036
+-78.822421
+------------------------
+Elmwood Taco & Subs
+937 Elmwood Ave, Buffalo, NY 14222, United States
+3.4
+42.922879
+-78.876674
+------------------------
+Tijuana Taco Inc
+420 Main St, Buffalo, NY 14202, United States
+42.885225
+-78.874965
+------------------------
+La Tolteca
+7530 Transit Rd, Buffalo, NY 14221, United States
+4.0
+42.973233
+-78.697458
+------------------------
+Salsarita's Fresh Cantina
+110 W Chippewa St, Buffalo, NY 14202, United States
+3.7
+42.890642
+-78.87706
+------------------------
+Chipotle Mexican Grill
+1643 Niagara Falls Blvd #44C, Buffalo, NY 14228, United States
+4.1
+42.999834
+-78.81955
+------------------------
+Lone Star Grille
+1853 Hertel Ave, Buffalo, NY 14216, United States
+4.3
+42.947378
+-78.839241
+------------------------
+Chili's
+1145 Niagara Falls Blvd, Amherst, NY 14226-1103, United States
+3.9
+42.984791
+-78.822121
+------------------------
+Ziggy's Taco & Sub
+3975 Main St, Buffalo, NY 14226, United States
+4.6
+42.96353
+-78.802808
+------------------------
+Amigos Restaurant
+1609 Kenmore Ave, Kenmore, NY 14217, United States
+42.958938
+-78.877865
+------------------------
+Moe's Southwest Grill
+5063 Transit Rd, Williamsville, NY 14221, United States
+3.8
+42.985129
+-78.696241
+------------------------
+Mighty Taco
+1762 Sheridan Dr, Buffalo, NY 14223, United States
+4.1
+42.98143
+-78.868932
+------------------------
+Don Tequila Mexican Restaurant
+73 Allen St, Buffalo, NY 14202, United States
+42.899582
+-78.872682
+------------------------
+Taco Bell
+3730 Union Road, Buffalo, NY 14221, United States
+3.1
+42.915489
+-78.754766
+------------------------
+Chipotle Mexican Grill
+1759 Sheridan Dr, Tonawanda, NY 14223, United States
+3.6
+42.980131
+-78.869283
+------------------------
+Salsarita's Fresh Cantina
+3901 Union Rd, Cheektowaga, NY 14225, United States
+4.2
+42.921457
+-78.752676
+------------------------
+Printing conents of Yelp List
+list size : 20
+cantina loco buffalo
+191 Allen St Allentown Buffalo, NY 14201 
+4.0
+181
+42.899643
+-78.876991
+------------------------
+don tequila mexican restaurant buffalo
+73 Allen St Main Street Buffalo, NY 14202 
+4.0
+90
+42.8994702547789
+-78.8727492839098
+------------------------
+valle of mexico buffalo
+1586 S Park Ave South Buffalo Buffalo, NY 14220 
+4.0
+56
+42.8549873519591
+-78.827638886869
+------------------------
+agave buffalo
+765 Elmwood Ave Elmwood Village Buffalo, NY 14222 
+3.5
+43
+42.9178675010556
+-78.876784196881
+------------------------
+el palenque buffalo
+951 Niagara Falls Blvd Buffalo, NY 14226 
+3.0
+84
+42.9800491333008
+-78.8223342895508
+------------------------
+la tolteca mexican restaurant williamsville
+7530 Transit Rd Williamsville, NY 14221 
+3.5
+81
+42.9732094
+-78.6976471
+------------------------
+el ranchito clarence
+9780 Main St Clarence, NY 14031 
+4.5
+42
+42.9748110603856
+-78.6252637309014
+------------------------
+salsaritas buffalo
+110 W Chippewa St Downtown Buffalo, NY 14202 
+3.5
+25
+42.8907906264067
+-78.8772118091583
+------------------------
+el agave cheektowaga
+3870 Union Rd Cheektowaga, NY 14225 
+4.0
+22
+42.919341
+-78.7551639
+------------------------
+el canelo restaurant buffalo 3
+3670 McKinley Plz Buffalo, NY 14219 
+3.0
+18
+42.786079
+-78.812188
+------------------------
+gramma moras mexican restaurant buffalo
+1465 Hertel Ave Hertel Avenue Buffalo, NY 14216 
+2.5
+64
+42.947665527463
+-78.8538732379675
+------------------------
+coyote cafe hamburg
+36 Main St Hamburg, NY 14075 
+3.0
+34
+42.7156677246094
+-78.8308563232422
+------------------------
+chipotle mexican grill cheektowaga
+1717 Walden Ave Cheektowaga, NY 14225 
+4.0
+15
+42.907227
+-78.77404
+------------------------
+lloyd taco truck buffalo 2
+Elmwood Village Buffalo, NY 14222 
+4.0
+216
+42.91476
+-78.87713
+------------------------
+chipotle mexican grill amherst
+1643 Niagara Falls Blvd Amherst, NY 14228 
+3.5
+35
+43.0000028014183
+-78.8222734630108
+------------------------
+mighty taco niagara falls
+2591 Military Rd Niagara Falls, NY 14304 
+3.0
+15
+43.107964
+-78.984848
+------------------------
+burrito bay getzville
+2341 Millersport Hwy Getzville, NY 14068 
+3.5
+20
+43.0141563
+-78.7689514
+------------------------
+chipotle mexican grill tonawanda
+1759 Sheridan Dr Tonawanda, NY 14223 
+3.5
+20
+42.9805552456302
+-78.8691973686218
+------------------------
+lone star fajita grill buffalo
+1855 Hertel Ave Hertel Avenue Buffalo, NY 14216 
+3.5
+35
+42.947334
+-78.839195
+------------------------
+rockos tacos buffalo
+86 Lake Ave Buffalo, NY 14219 
+4.5
+3
+42.796929
+-78.828074
+------------------------
+[ub.cse636.project.Place@44d37df9, ub.cse636.project.Place@10badc27, ub.cse636.project.Place@63947fa, ub.cse636.project.Place@77bd0bd4, ub.cse636.project.Place@5bcb8d05, ub.cse636.project.Place@5237118b, ub.cse636.project.Place@46d3f7ea, ub.cse636.project.Place@10977258, ub.cse636.project.Place@1d60e6d8, ub.cse636.project.Place@1c53c8b6, ub.cse636.project.Place@1aa47147, ub.cse636.project.Place@2d43fc61, ub.cse636.project.Place@2208f9fb, ub.cse636.project.Place@7b53df31, ub.cse636.project.Place@41bfb3e2, ub.cse636.project.Place@409e3341, ub.cse636.project.Place@1338d35f, ub.cse636.project.Place@4a6e5b7e, ub.cse636.project.Place@3f624938, ub.cse636.project.Place@4db51c0a]
+[ub.cse636.project.Place@46ab39e5, ub.cse636.project.Place@192a9621, ub.cse636.project.Place@3dbafe70, ub.cse636.project.Place@7c70e01, ub.cse636.project.Place@3f968ab9, ub.cse636.project.Place@13660da2, ub.cse636.project.Place@36927b70, ub.cse636.project.Place@3ae65d6f, ub.cse636.project.Place@110910a1, ub.cse636.project.Place@10e975db, ub.cse636.project.Place@6a00409e, ub.cse636.project.Place@346d984c, ub.cse636.project.Place@18f389bc, ub.cse636.project.Place@1cd7a270, ub.cse636.project.Place@4f388589, ub.cse636.project.Place@729c078, ub.cse636.project.Place@316c4f11, ub.cse636.project.Place@1d6867a4, ub.cse636.project.Place@4ae6120d, ub.cse636.project.Place@461b09f4]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2.696 s
+[INFO] Finished at: 2014-11-18T19:10:43-05:00
+[INFO] Final Memory: 7M/152M
+[INFO] ------------------------------------------------------------------------

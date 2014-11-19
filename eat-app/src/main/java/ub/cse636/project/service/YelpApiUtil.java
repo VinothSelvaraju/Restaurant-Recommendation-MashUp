@@ -12,7 +12,6 @@ public class YelpApiUtil
 	
 	public YelpApiUtil() 
 	{
-		
 	}
 	
 	public YelpApiUtil(String input) 

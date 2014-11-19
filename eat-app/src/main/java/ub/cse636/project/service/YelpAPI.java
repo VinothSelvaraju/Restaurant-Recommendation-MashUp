@@ -33,7 +33,7 @@ public class YelpAPI {
 
 	private static final String API_HOST = "api.yelp.com";
 	private static final String DEFAULT_TERM = "dinner";
-	private static final String DEFAULT_LOCATION = "San Francisco, CA";
+	private static final String DEFAULT_LOCATION = "Buffalo, NY";
 	private static final int SEARCH_LIMIT = 20;
 	private static final String SEARCH_PATH = "/v2/search";
 	private static final String BUSINESS_PATH = "/v2/business";
@@ -145,7 +145,7 @@ public class YelpAPI {
 		for(int i=0; i<businesses.size(); i++)
 		{
 			JSONObject temp = (JSONObject) businesses.get(i);
-			String Name = temp.get("id").toString();
+			String Name = temp.get("id").toString().replace('-',' ');
 
 			Object ratingObj = temp.get("rating");
 			Double rating = null;
