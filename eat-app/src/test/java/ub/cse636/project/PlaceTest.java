@@ -5,11 +5,17 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import static org.junit.Assert.*;
 
-class PlaceTest{
+public class PlaceTest extends TestCase{
 	
+    public PlaceTest( String testName )
+    {
+        super( testName );
+    }
+
 	//Test Lattitude
     public void testGetLattitude() {
-    	Place place = new Place();
+    	
+        Place place = new Place();
     	
     	//1. Positive case
     	double delta = 1e-15;
@@ -20,15 +26,17 @@ class PlaceTest{
     	assertEquals(1.2, res1, delta);
     	
     	//2. Null case
+        assertNotNull(place);
     	place.setGeoCoordinates(null,null);
-    	double res3 = place.getLattitude();
-    	assertEquals(null, res3, delta);
+    	Double res3 = place.getLattitude();
+    	assertNull(res3);
     	
     }
 
     //Test Longitude
      public void testGetLongitude() {
-     	Place place = new Place();
+     	
+        Place place = new Place();
 
     	//1. Positive case
     	double delta = 1e-15;
@@ -39,9 +47,10 @@ class PlaceTest{
     	assertEquals(0.55, res2, delta);
 
     	//2. Null case
+        assertNotNull(place);
     	place.setGeoCoordinates(null,null);
-    	double res4 = place.getLongitude();
-    	assertEquals(null, res4, delta);
+    	Double res4 = place.getLongitude();
+    	assertNull(res4);
 
      }
 }

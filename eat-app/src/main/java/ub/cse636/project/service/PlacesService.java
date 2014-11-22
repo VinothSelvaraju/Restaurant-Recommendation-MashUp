@@ -28,6 +28,50 @@ public class PlacesService{
     // KEY!
     private static final String API_KEY = "AIzaSyBqxv1mclccpXKSqBRaVuev_F2FOXpMuC8";
 
+    //Text search service
+    public static  ArrayList<Place> textSearchAPICall(String input) {
+        ArrayList<Place> resultList = null;
+        String query = input.replace(" ","+").trim();
+
+        // System.out.println("Processed query: " + query);
+
+        HttpURLConnection conn = null;
+        StringBuilder jsonResults = new StringBuilder();
+        try {
+            StringBuilder sb = new StringBuilder(PLACES_API_BASE);
+            
+            sb.append(TEXT_SEARCH);
+            sb.append(OUT_JSON);
+            sb.append("?query=" + query);
+            sb.append("&key=" + API_KEY);
+            
+            // System.out.println("formed URL :" + sb.toString());
+           
+            URL url = new URL(sb.toString());
+            conn = (HttpURLConnection) url.openConnection();
+            InputStreamReader in = new InputStreamReader(conn.getInputStream());
+
+            int read;
+            char[] buff = new char[1024];
+            while ((read = in.read(buff)) != -1) {
+                jsonResults.append(buff, 0, read);
+            }
+
+            resultList = parseJSON(jsonResults.toString());
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+             e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.disconnect();
+            }
+        }
+        return resultList;
+    }
+
+
     //parseJSON
     public static ArrayList<Place> parseJSON(String s){
         ArrayList<Place> placeList = null;
@@ -82,48 +126,5 @@ public class PlacesService{
             }
         }
         return placeList;
-    }
-
-    //Text search service
-    public static  ArrayList<Place> textSearch(String input) {
-        ArrayList<Place> resultList = null;
-        String query = input.replace(" ","+").trim();
-
-        // System.out.println("Processed query: " + query);
-
-        HttpURLConnection conn = null;
-        StringBuilder jsonResults = new StringBuilder();
-        try {
-            StringBuilder sb = new StringBuilder(PLACES_API_BASE);
-            
-            sb.append(TEXT_SEARCH);
-            sb.append(OUT_JSON);
-            sb.append("?query=" + query);
-            sb.append("&key=" + API_KEY);
-            
-            // System.out.println("formed URL :" + sb.toString());
-           
-            URL url = new URL(sb.toString());
-            conn = (HttpURLConnection) url.openConnection();
-            InputStreamReader in = new InputStreamReader(conn.getInputStream());
-
-            int read;
-            char[] buff = new char[1024];
-            while ((read = in.read(buff)) != -1) {
-                jsonResults.append(buff, 0, read);
-            }
-
-            resultList = parseJSON(jsonResults.toString());
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-             e.printStackTrace();
-        } finally {
-            if (conn != null) {
-                conn.disconnect();
-            }
-        }
-        return resultList;
     }
 }

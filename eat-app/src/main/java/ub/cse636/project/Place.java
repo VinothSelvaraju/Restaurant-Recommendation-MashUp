@@ -26,6 +26,14 @@ public class Place{
 	private Double rating;
 	private int reviewCount;
 
+	public Place(){
+		name = "";
+		address = "";
+		placeId = 0;
+		rating = new Double(0);
+		reviewCount = 0;
+	}
+
 	//first element - lattitude; second element - longitude
 	private final Double[] geoCoordinates = new Double[2];
 

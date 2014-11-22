@@ -1,7 +1,11 @@
 /Volumes/MacintoshHD2/UB/Fall2014/DataIntegration/Restaurant-Recommendation-MashUp/eat-app/src/main/java/ub/cse636/project/servlet/GetInput.java
 /Volumes/MacintoshHD2/UB/Fall2014/DataIntegration/Restaurant-Recommendation-MashUp/eat-app/src/main/java/ub/cse636/project/App.java
+/Volumes/MacintoshHD2/UB/Fall2014/DataIntegration/Restaurant-Recommendation-MashUp/eat-app/src/main/java/ub/cse636/project/service/UberService.java
+/Volumes/MacintoshHD2/UB/Fall2014/DataIntegration/Restaurant-Recommendation-MashUp/eat-app/src/main/java/ub/cse636/project/UberPrice.java
+/Volumes/MacintoshHD2/UB/Fall2014/DataIntegration/Restaurant-Recommendation-MashUp/eat-app/src/main/java/ub/cse636/project/util/Util.java
 /Volumes/MacintoshHD2/UB/Fall2014/DataIntegration/Restaurant-Recommendation-MashUp/eat-app/src/main/java/ub/cse636/project/service/YelpApiUtil.java
 /Volumes/MacintoshHD2/UB/Fall2014/DataIntegration/Restaurant-Recommendation-MashUp/eat-app/src/main/java/ub/cse636/project/service/PlacesService.java
-/Volumes/MacintoshHD2/UB/Fall2014/DataIntegration/Restaurant-Recommendation-MashUp/eat-app/src/main/java/ub/cse636/project/service/YelpAPI.java
-/Volumes/MacintoshHD2/UB/Fall2014/DataIntegration/Restaurant-Recommendation-MashUp/eat-app/src/main/java/ub/cse636/project/service/TwoStepOAuth.java
 /Volumes/MacintoshHD2/UB/Fall2014/DataIntegration/Restaurant-Recommendation-MashUp/eat-app/src/main/java/ub/cse636/project/Place.java
+/Volumes/MacintoshHD2/UB/Fall2014/DataIntegration/Restaurant-Recommendation-MashUp/eat-app/src/main/java/ub/cse636/project/service/TwoStepOAuth.java
+/Volumes/MacintoshHD2/UB/Fall2014/DataIntegration/Restaurant-Recommendation-MashUp/eat-app/src/main/java/ub/cse636/project/service/YelpAPI.java
+/Volumes/MacintoshHD2/UB/Fall2014/DataIntegration/Restaurant-Recommendation-MashUp/eat-app/src/main/java/ub/cse636/project/UberProduct.java
