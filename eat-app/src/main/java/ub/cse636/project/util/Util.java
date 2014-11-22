@@ -95,6 +95,16 @@ public class Util{
 	}
 
 
+	//Printing the content of Uber API - promotions 
+	public static void printPromotionsArray(String[] s){
+		if(s != null && s.length == 3){
+			System.out.println("display_text : " + s[0]);
+			System.out.println("localized_value : " + s[1]);
+			System.out.println("type : " + s[2]);
+		}
+	}
+
+
 	/*
 		Curl command execution
 		Input - API key; Query URL

@@ -183,6 +183,61 @@ public class UberService{
 		return null;
 	}
 
+
+	/*
+		Promotions Uber API call:
+			The Promotions endpoint returns information about the promotion that will be available to a new user based on their activity's location
+		Input:
+			start_latitude
+			start_longitude
+			end_latitude
+			end_longitude
+
+		Output:
+			String[] of size 3
+			(OR)
+			null 
+
+		Example API output:
+			{
+			  "display_text": "Free ride up to $30",
+			  "localized_value": "$30",
+			  "type": "trip_credit"
+			}
+	*/
+	public static String[] uberPromotionsAPICall(Double startLatitude, 
+							Double startLongitude, Double endLatitude, Double endLongitude){
+
+
+		//Input check
+		if (startLatitude != null && startLongitude != null && endLatitude != null && endLongitude != null) {
+			
+			StringBuilder query = new StringBuilder();
+	 		String outputFormat = "json";
+
+			//Form query URL
+		 	query.append("https://api.uber.com/v1/promotions?");
+		 	query.append("start_latitude=");
+		 	query.append(startLatitude);
+		 	query.append("&");
+		 	query.append("start_longitude=");
+		 	query.append(startLongitude);
+		 	query.append("&");
+		 	query.append("end_latitude=");
+		 	query.append(endLatitude);
+		 	query.append("&");
+		 	query.append("end_longitude=");
+		 	query.append(endLongitude);
+
+		 	String output = Util.executeCurlCommand(UberService.API_KEY,query.toString(), outputFormat);
+
+			return parseUberPromotionsJSON(output.toString());
+		}
+		return null;
+	}
+
+
+
 	/*Parse Uber Product API result: 
 		Ex: 
 			"products":[
@@ -401,6 +456,58 @@ public class UberService{
 				            }
 				            return uberProdTimeEstimateMap;
 		   				}
+	            	}
+	            }
+	        }
+	        catch(ParseException e){
+	            e.printStackTrace();
+	        }
+	        catch(Exception e){
+	            e.printStackTrace();
+	        }
+	    }
+	    return null;
+	}
+
+	/*
+		Parse Uber Promotions API result: 
+		Ex: 
+			{
+			  "display_text": "Free ride up to $30",
+			  "localized_value": "$30",
+			  "type": "trip_credit"
+			}
+	*/
+	public static String[] parseUberPromotionsJSON(String s){
+
+		if(s != null && !s.isEmpty()){
+	        
+	        String[] promotionsArray = new String[3];
+	        promotionsArray[0] = "";
+	        promotionsArray[1] = "";
+	        promotionsArray[2] = "";
+	        JSONParser parser = new JSONParser();
+
+	        try{
+	            Object obj = parser.parse(s);
+	            if(obj != null){
+	            	JSONObject jsonObject = (JSONObject) obj;
+	            	if(jsonObject != null && jsonObject.toString().contains("display_text")){
+	            		
+	                	String displayText = (String) jsonObject.get("display_text");
+	                	if(displayText != null){
+	                		promotionsArray[0] = displayText;
+	                	}
+	                	String value = (String) jsonObject.get("localized_value");
+	                	if(value != null){
+	                		promotionsArray[1] = value;
+	                	}
+	                	String type = (String) jsonObject.get("type");
+	                	if(type != null){
+	                		promotionsArray[2] = type;
+	                	}
+
+				        return promotionsArray;
 	            	}
 	            }
 	        }

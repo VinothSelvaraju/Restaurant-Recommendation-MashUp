@@ -20,6 +20,7 @@ public class App
 		ArrayList<UberProduct> resultListUberProduct = null;
 		Map<String, UberPrice> resultMapUberProdPriceEst = null;
 		Map<String, Long> resultMapUberProdTimeEst = null;
+		String[] resultArrayUberPromo;
 
 		//Sample query
 		String query = "mexican restaurant in buffalo";
@@ -45,19 +46,19 @@ public class App
 		// HashSet<Place> yelpSet = new HashSet(resultListYelp);
 
 
-		//Uber api call - product types
+		//Uber api call - product types : returns List of UberProduct available at the location
 		double lat = 37.7759792;
 		double lng = -122.41823;
-		resultListUberProduct = UberService.uberProductSearchAPICall(lat,lng);
+		// resultListUberProduct = UberService.uberProductSearchAPICall(lat,lng);
 		//Print content of Uber Prod object (After time estimate is received)
-		Util.printUberProdList(resultListUberProduct);
+		// Util.printUberProdList(resultListUberProduct);
 		
 
 		//Uber api call - Time Estimates : returns a Map of productID & timeEstimate
 		Util.waitForSecond();
-		resultMapUberProdTimeEst = UberService.uberTimeEstimatesAPICall(lat,lng);
+		// resultMapUberProdTimeEst = UberService.uberTimeEstimatesAPICall(lat,lng);
 		//Print content of uberTimeEstimate map
-		Util.printUberTimeEstimateMap(resultMapUberProdTimeEst);
+		// Util.printUberTimeEstimateMap(resultMapUberProdTimeEst);
 		
 
 		
@@ -67,9 +68,15 @@ public class App
 		double startLongitude = -122.4167;
 		double endLatitude = 37.3544;
 		double endLongitude = -121.9692;
-		resultMapUberProdPriceEst = UberService.uberPriceEstimatesAPICall(startLatitude, startLongitude, endLatitude, endLongitude);
+		// resultMapUberProdPriceEst = UberService.uberPriceEstimatesAPICall(startLatitude, startLongitude, endLatitude, endLongitude);
 		//Print content of uberPriceEstimate map
-		Util.printUberPriceEstimateMap(resultMapUberProdPriceEst);
-		
+		// Util.printUberPriceEstimateMap(resultMapUberProdPriceEst);
+
+
+		//Uber api call - promotions : returns String[] of size 3 : display_text, localized_value & type
+		Util.waitForSecond();
+		resultArrayUberPromo = UberService.uberPromotionsAPICall(startLatitude, startLongitude, endLatitude, endLongitude);
+		//Print content of resultArrayUberPromo
+		Util.printPromotionsArray(resultArrayUberPromo);
 	}
 }

@@ -91,8 +91,7 @@ public class UberServiceTest extends TestCase{
     }
 
 
-    //Test uber API - price
-    //uberTimeEstimatesAPICall(Double startLatitude, Double startLongitude)
+    //Test uber API - time
     public void testUberTimeEstimatesAPICall(){
 
     	double startLatitude = 37.7833;
@@ -117,6 +116,48 @@ public class UberServiceTest extends TestCase{
 		}
     }
 
+
+    //Test uber API - promotions
+    public void testUberPromotionsAPICall(){
+
+    	double startLatitude = 37.7833;
+		double startLongitude = -122.4167;
+		double endLatitude = 37.3544;
+		double endLongitude = -121.9692;
+
+		//1. Null Test
+		String[] outArray1 = UberService.uberPromotionsAPICall(null,null,null,null);
+		assertNull(outArray1);
+
+		//2. Positive Test (Valid set of co-ordinates)
+		String[] outArray2 = UberService.uberPromotionsAPICall(startLatitude,startLongitude,endLatitude,endLongitude);
+		//Test output of API call not NULL
+		assertNotNull(outArray2);
+		//Test each of the value parsed is not NULL
+		for(int i = 0;i<outArray2.length;i++){
+			assertNotNull(outArray2[i]);
+		}
+
+		//3. Negative Test : incorrect coordinates (All zeros)
+		String[] outArray3 = UberService.uberPromotionsAPICall(0.0,0.0,0.0,0.0);
+		//Test output of API call NULL
+		assertNull(outArray3);
+
+		//4. Positive Test : incorrect coordinates (Start & end geo-coordinate same) but one valid set is available
+		String[] outArray4 = UberService.uberPromotionsAPICall(startLatitude,startLongitude,startLatitude,startLongitude);
+		//Test output of API call NULL
+		assertNotNull(outArray4);
+		//Test each of the value parsed is not NULL
+		for(int i = 0;i<outArray4.length;i++){
+			assertNotNull(outArray4[i]);
+		}
+
+		//5. Negative Test : incorrect coordinates (Lattitude correct but longitude wrong & vice versa)
+		String[] outArray5 = UberService.uberPromotionsAPICall(startLatitude,0.0,0.0,endLongitude);
+		//Test output of API call NULL
+		assertNull(outArray5);
+
+    }
 
 
     //Test parse JSON for Uber - Product search
@@ -426,8 +467,6 @@ public class UberServiceTest extends TestCase{
     }
 
     public void testParseUberTimeJSON() {
-
-    	double delta = 1e-15;
     	
     	//1. null test
     	Map<String,Long> outMap1 = UberService.parseUberTimeJSON(null);
@@ -495,6 +534,84 @@ public class UberServiceTest extends TestCase{
 			//Test values
 			assertEquals("a1111c8c-c720-46c3-8534-2fcdd730040d", key);
 			assertEquals(0L, (long) value);
+		}
+	}
+
+	 public void testParseUberPromotionsJSON() {
+    	
+    	//1. null test
+    	String[] outArray1 = UberService.parseUberPromotionsJSON(null);
+    	assertNull(outArray1);
+
+    	//2. empty test
+    	String[] outArray2  = UberService.parseUberPromotionsJSON("");
+    	assertNull(outArray2);
+
+    	//3. Positive test
+    	String inp1 = "{" + 
+					  "\"display_text\": \"Free ride up to $30\"," +
+					  "\"localized_value\": \"$30\"," +
+					  "\"type\": \"trip_credit\"" +
+					"}";
+
+		String[] outArray3 = UberService.parseUberPromotionsJSON(inp1);
+		assertNotNull(outArray3);
+
+		for (int i = 0;i<outArray3.length;i++) {
+   			
+   			assertNotNull(outArray3[i]);
+
+   			//Test values
+   			if(i==0){
+				assertEquals("Free ride up to $30", outArray3[0]);
+   			}
+   			else if(i==1){
+   				assertEquals("$30", outArray3[1]);
+   			}
+   			else if(i==2){
+   				assertEquals("trip_credit", outArray3[2]);	
+   			}
+		}
+
+		//4. Negative test - empty test
+		String inp2 = "{}";
+    	String[] outArray4 = UberService.parseUberPromotionsJSON(inp2);
+		assertNull(outArray4);
+
+		//5. Negative test - Error 422 Invalid Request
+		String inp3 = "{"+
+			"\"message\": \"Invalid user\","+
+			"\"code\": \"invalid\","+
+			"\"fields\": {"+
+			  "\"first_name\": [\"Required\"]"+
+			"}"+
+		"}";
+		String[] outArray5 = UberService.parseUberPromotionsJSON(inp3);
+		assertNull(outArray5);
+
+		//6. Positive test - Partial result (Test default values i.e. empty for unavailable fields)
+    	String inp4 = "{" + 
+					  "\"display_text\": \"Free ride up to $30\"," +
+					  "\"type\": \"trip_credit\"" +
+					"}";
+
+		String[] outArray6 = UberService.parseUberPromotionsJSON(inp4);
+		assertNotNull(outArray6);
+
+		for (int i = 0;i<outArray6.length;i++) {
+   			
+   			assertNotNull(outArray6[i]);
+
+   			//Test values
+   			if(i==0){
+				assertEquals("Free ride up to $30", outArray6[0]);
+   			}
+   			else if(i==1){
+   				assertEquals("", outArray6[1]);
+   			}
+   			else if(i==2){
+   				assertEquals("trip_credit", outArray6[2]);	
+   			}
 		}
 	}
 }
