@@ -9,18 +9,20 @@ public class YelpApiUtil
 {
 	
 	private String input;
+	private String location;
 	
 	public YelpApiUtil() 
 	{
 	}
 	
-	public YelpApiUtil(String input) 
+	public YelpApiUtil(String input,String location) 
 	{
 		this.input = input;
+		this.location = location;
 	}
 	
 	public ArrayList<Place> start()
 	{
-		return YelpAPI.getRestaurants(input);
+		return YelpAPI.getRestaurants(input, location);
 	}
 }

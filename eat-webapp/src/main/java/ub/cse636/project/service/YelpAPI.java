@@ -122,11 +122,11 @@ public class YelpAPI {
 	}
 
 
-	private static ArrayList<Place> queryAPI(YelpAPI yelpApi, String input) {
+	private static ArrayList<Place> queryAPI(YelpAPI yelpApi, String input, String location) {
 
 		//System.out.println("INPUT "+input);
 		String searchResponseJSON =
-				yelpApi.searchForBusinessesByLocation(input, DEFAULT_LOCATION);
+				yelpApi.searchForBusinessesByLocation(input, location);
 		JSONParser parser = new JSONParser();
 		JSONObject response = null;
 		ArrayList<Place> placeList = new ArrayList<Place>();
@@ -202,10 +202,10 @@ public class YelpAPI {
 		return placeList;
 	}
 
-	public static ArrayList<Place> getRestaurants(String input)
+	public static ArrayList<Place> getRestaurants(String input, String location)
 	{
 		YelpAPI yelpApi = new YelpAPI(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, TOKEN_SECRET);
-		return queryAPI(yelpApi, input);
+		return queryAPI(yelpApi, input, location);
 	}
 
 }
