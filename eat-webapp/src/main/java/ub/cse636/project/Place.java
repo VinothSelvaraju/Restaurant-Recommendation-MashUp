@@ -1,4 +1,6 @@
 package ub.cse636.project;
+
+import java.util.ArrayList;
 /*
 formatted_address
 	geometry
@@ -23,19 +25,22 @@ public class Place{
 	private String name;
 	private String address;
 	private int placeId;
-	private Double rating;
+	private double rating;
 	private int reviewCount;
+	//first element - lattitude; second element - longitude
+	private Double[] geoCoordinates = new Double[2];
+	private ArrayList<String> typeList;
 
 	public Place(){
 		name = "";
 		address = "";
 		placeId = 0;
-		rating = new Double(0);
+		rating = 0.0;
 		reviewCount = 0;
+		typeList = new ArrayList<String>();
+		geoCoordinates[0] = 0.0;
+		geoCoordinates[1] = 0.0;
 	}
-
-	//first element - lattitude; second element - longitude
-	private final Double[] geoCoordinates = new Double[2];
 
 	public void setName(String name){
 		this.name = name;
@@ -54,11 +59,14 @@ public class Place{
 		geoCoordinates[0] = lattitude;
 		geoCoordinates[1] = longitude;
 	}
-	
 	public void setReviewCount(int a)
 	{
 		this.reviewCount = a;
 	}
+	public void setTypeList(ArrayList<String> typeList){
+		this.typeList = typeList;
+	}
+
 	
 	public String getName(){
 		return name;
@@ -88,5 +96,8 @@ public class Place{
 	}
 	public int getReviewCount(){
 		return reviewCount;
+	}
+	public ArrayList<String> getTypeList(){
+		return typeList;
 	}
 }

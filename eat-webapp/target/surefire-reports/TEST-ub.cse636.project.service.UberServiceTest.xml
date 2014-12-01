@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="1.905" errors="0" skipped="0" tests="6" name="ub.cse636.project.service.UberServiceTest">
+<testsuite failures="0" time="4.291" errors="0" skipped="0" tests="8" name="ub.cse636.project.service.UberServiceTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Libraries"/>
@@ -45,7 +45,7 @@
     <property name="java.vm.specification.version" value="1.0"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher package tomcat7:deploy"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test"/>
     <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="apple.awt.CToolkit"/>
@@ -64,10 +64,12 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.63" classname="ub.cse636.project.service.UberServiceTest" name="testUberProductSearchAPICall"/>
-  <testcase time="0.659" classname="ub.cse636.project.service.UberServiceTest" name="testUberPriceEstimatesAPICall"/>
-  <testcase time="0.614" classname="ub.cse636.project.service.UberServiceTest" name="testUberTimeEstimatesAPICall"/>
+  <testcase time="0.652" classname="ub.cse636.project.service.UberServiceTest" name="testUberProductSearchAPICall"/>
+  <testcase time="0.671" classname="ub.cse636.project.service.UberServiceTest" name="testUberPriceEstimatesAPICall"/>
+  <testcase time="0.579" classname="ub.cse636.project.service.UberServiceTest" name="testUberTimeEstimatesAPICall"/>
+  <testcase time="2.386" classname="ub.cse636.project.service.UberServiceTest" name="testUberPromotionsAPICall"/>
   <testcase time="0.001" classname="ub.cse636.project.service.UberServiceTest" name="testParseUberProductJSON"/>
   <testcase time="0.001" classname="ub.cse636.project.service.UberServiceTest" name="testParseUberPriceJSON"/>
-  <testcase time="0" classname="ub.cse636.project.service.UberServiceTest" name="testParseUberTimeJSON"/>
+  <testcase time="0.001" classname="ub.cse636.project.service.UberServiceTest" name="testParseUberTimeJSON"/>
+  <testcase time="0" classname="ub.cse636.project.service.UberServiceTest" name="testParseUberPromotionsJSON"/>
 </testsuite>
