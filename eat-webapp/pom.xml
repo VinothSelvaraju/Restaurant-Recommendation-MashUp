@@ -68,7 +68,16 @@
                 <goals><goal>copy-dependencies</goal></goals>
             </execution>
         </executions>
-    </plugin>
+      </plugin>
+      <!-- <plugin>
+        <groupId>com.heroku.sdk</groupId>
+        <artifactId>heroku-maven-plugin</artifactId>
+        <version>0.1.8</version>
+        <configuration>
+          <appName>eatwebapp</appName>
+          <jdkVersion>1.8</jdkVersion>
+        </configuration>
+    </plugin> -->
   	</plugins>
     <finalName>my-webapp</finalName>
   </build>

@@ -2,14 +2,11 @@ package ub.cse636.project.service;
 
 import ub.cse636.project.UberProduct;
 import ub.cse636.project.UberPrice;
-
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
-import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Map;
+
 
 public class UberServiceTest extends TestCase{
 
@@ -18,7 +15,17 @@ public class UberServiceTest extends TestCase{
 		super( testName );
 	}
 
-	//Test uber API - product 
+	/*
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		Test method for ArrayList<UberProduct> uberProductSearchAPICall(Double lat, Double lng)
+     * Input: 
+     *   	NA
+     * Output:
+     *   	NA
+	 * 
+	 */ 
 	public void testUberProductSearchAPICall() {
 
 		double lat = 37.7759792;
@@ -52,7 +59,18 @@ public class UberServiceTest extends TestCase{
 		}
 	}
 
-	//Test uber API - price 
+	/*
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		Test method for Map<String,UberPrice> uberPriceEstimatesAPICall(Double startLatitude, 
+			Double startLongitude, Double endLatitude, Double endLongitude)
+     * Input: 
+     *   	NA
+     * Output:
+     *   	NA
+	 * 
+	 */ 
 	public void testUberPriceEstimatesAPICall(){
 
 		double startLatitude = 37.7833;
@@ -91,7 +109,17 @@ public class UberServiceTest extends TestCase{
 	}
 
 
-	//Test uber API - time
+	/*
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		Test method for Map<String,Long> uberTimeEstimatesAPICall(Double startLatitude, Double startLongitude)
+     * Input: 
+     *   	NA
+     * Output:
+     *   	NA
+	 * 
+	 */ 
 	public void testUberTimeEstimatesAPICall(){
 
 		double startLatitude = 37.7833;
@@ -105,19 +133,30 @@ public class UberServiceTest extends TestCase{
 		Map<String,Long> outMap2 = UberService.uberTimeEstimatesAPICall(startLatitude,startLongitude);
 
 		//Test output of API call not NULL
-		// assertNotNull(outMap2);
+		assertNotNull(outMap2);
 
-		// //Test each of the value parsed is not NULL
-		// for (Map.Entry<String, Long> entry : outMap2.entrySet()) {
-		// 	String key = entry.getKey();
-		// 	assertNotNull(key);
-		// 	Long value = entry.getValue();
-		// 	assertNotNull(value);
-		// }
+		//Test each of the value parsed is not NULL
+		for (Map.Entry<String, Long> entry : outMap2.entrySet()) {
+			String key = entry.getKey();
+			assertNotNull(key);
+			Long value = entry.getValue();
+			assertNotNull(value);
+		}
 	}
 
 
-	//Test uber API - promotions
+	/*
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		Test method for String[] uberPromotionsAPICall(Double startLatitude, 
+			Double startLongitude, Double endLatitude, Double endLongitude)
+     * Input: 
+     *   	NA
+     * Output:
+     *   	NA
+	 * 
+	 */ 
 	public void testUberPromotionsAPICall(){
 
 		double startLatitude = 37.7833;
@@ -160,7 +199,17 @@ public class UberServiceTest extends TestCase{
 	}
 
 
-	//Test parse JSON for Uber - Product search
+	/*
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		Test method for ArrayList<UberProduct> parseUberProductJSON(String s, Double lat, Double lng)
+     * Input: 
+     *   	NA
+     * Output:
+     *   	NA
+	 * 
+	 */ 
 	public void testParseUberProductJSON() {
 
 		double delta = 1e-15;
@@ -290,7 +339,7 @@ public class UberServiceTest extends TestCase{
 				"}"+
 				"]}";
 		ArrayList<UberProduct> uberProdList7 = UberService.parseUberProductJSON(inp5, null, null);
-		assertNull(uberProdList6);
+		assertNull(uberProdList7);
 
 		//8. Negative test - Error 422 Invalid Request
 		String inp6 = "{"+
@@ -301,11 +350,21 @@ public class UberServiceTest extends TestCase{
 				"}"+
 				"}";
 		ArrayList<UberProduct> uberProdList8 = UberService.parseUberProductJSON(inp6,  22.001, -122.345);
-		assertNull(uberProdList6);
+		assertNull(uberProdList8);
 
 	}
 
-
+	/*
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		Test method for Map<String,UberPrice> parseUberPriceJSON(String s)
+     * Input: 
+     *   	NA
+     * Output:
+     *   	NA
+	 * 
+	 */ 
 	public void testParseUberPriceJSON() {
 
 		double delta = 1e-15;
@@ -316,7 +375,7 @@ public class UberServiceTest extends TestCase{
 
 		//2. empty test
 		Map<String,UberPrice> outMap2 = UberService.parseUberPriceJSON("");
-		assertNull(outMap1);
+		assertNull(outMap2);
 
 		//3. Positive test
 		String inp1 = "{\"prices\":[{" + 
@@ -465,7 +524,18 @@ public class UberServiceTest extends TestCase{
 		// 	assertEquals(44.87, value.getDistance(), delta);
 		// }
 	}
-
+	
+	/*
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		Test method for Map<String,Long> parseUberTimeJSON(String s)
+     * Input: 
+     *   	NA
+     * Output:
+     *   	NA
+	 * 
+	 */ 
 	public void testParseUberTimeJSON() {
 
 		//1. null test
@@ -536,7 +606,18 @@ public class UberServiceTest extends TestCase{
 			assertEquals(0L, (long) value);
 		}
 	}
-
+	
+	/*
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		Test method for String[] parseUberPromotionsJSON(String s)
+     * Input: 
+     *   	NA
+     * Output:
+     *   	NA
+	 * 
+	 */ 
 	public void testParseUberPromotionsJSON() {
 
 		//1. null test

@@ -1,10 +1,6 @@
 package ub.cse636.project.service;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 
 import ub.cse636.project.Place;
@@ -16,14 +12,28 @@ public class PlacesServiceTest extends TestCase{
 		super( testName );
 	}
 
-	//Test places API - nearbysearch
-	//ArrayList<Place> nearbySearchAPICall(Double lat, Double lng, int radius)
+	/*
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		Test method for ArrayList<Place> nearbySearchAPICall(Double lat, Double lng, int radius)
+     * Input: 
+     *   	NA
+     * Output:
+     *   	NA
+	 * 
+	 */
 	public void testNearbySearchAPICall() {
 
 		double lat = -33.8670522;
 		double lng = 151.1957362;
-		int radius = 5000;	
-
+		int radius = 500;
+		ArrayList<String> typeList = new ArrayList<String>();
+		typeList.add("food");
+		typeList.add("cafe");
+		ArrayList<String> emptyList = new ArrayList<String>();
+		
+		//Test method with signature : ArrayList<Place> nearbySearchAPICall(Double lat, Double lng, Integer radius)
 		//null test
 		ArrayList<Place> out1 = PlacesService.nearbySearchAPICall(null,null, radius);
 		assertNull(out1);
@@ -48,9 +58,63 @@ public class PlacesServiceTest extends TestCase{
 			assertNotNull(itr.getLongitude());
 			assertNotNull(itr.getRating());
 		}
+		
+		//Test method with signature : ArrayList<Place> nearbySearchAPICall(Double lat, Double lng, Integer radius, ArrayList<String> typeList)
+		//null test
+		ArrayList<Place> out5 = PlacesService.nearbySearchAPICall(null,null, radius, null);
+		assertNull(out5);
+
+		ArrayList<Place> out6 = PlacesService.nearbySearchAPICall(lat,null, radius, typeList);
+		assertNull(out6);
+
+		ArrayList<Place> out7 = PlacesService.nearbySearchAPICall(null,lng, null, typeList);
+		assertNull(out7);
+
+		//empty typeList
+		ArrayList<Place> out8 = PlacesService.nearbySearchAPICall(lat,lng, radius, emptyList);
+		assertNotNull(out8);
+		// Test each of the value parsed is not NULL
+		for(Place itr : out8){
+			assertNotNull(itr);
+			assertNotNull(itr.getName());
+			assertNotNull(itr.getLattitude());
+			assertNotNull(itr.getLongitude());
+			assertNotNull(itr.getRating());
+			assertNotNull(itr.getTypeList());
+		}
+
+		//Positive case
+		ArrayList<Place> out9 = PlacesService.nearbySearchAPICall(lat,lng, radius, typeList);
+		//Test output of API call not NULL
+		assertNotNull(out9);
+		//Test number of results of the API call
+		assertEquals(20,out9.size());
+		// Test each of the value parsed is not NULL
+		for(Place itr : out9){
+			assertNotNull(itr);
+			assertNotNull(itr.getTypeList());
+			assertNotNull(itr.getName());
+			assertNotNull(itr.getLattitude());
+			assertNotNull(itr.getLongitude());
+			assertNotNull(itr.getRating());
+			assertNotNull(itr.getTypeList());
+			for(String s : itr.getTypeList()){
+				assertNotNull(s);
+			}
+		}
 	}
 
-	//Test parse JSON for Places - Nearby search
+	/*
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		Test method for parseNearbySearchJSON(String s) : s is the json output in String
+     * Input: 
+     *   	NA
+     * Output:
+     *   	NA
+	 * 
+	 */
 	public void testParseNearbySearchJSON() {
 
 		double delta = 1e-15;

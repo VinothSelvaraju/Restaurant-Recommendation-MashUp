@@ -28,29 +28,18 @@ public class UberService{
 
 	private static final String API_KEY = "ottJav45V1ZXaH0sH8bgMVaYc_Qzkc95Ee0LqhBH";
 
-
 	/*
-		Product Uber API call:
-			The Products endpoint returns information about the Uber products offered at a given location
-
-		Input:
-			latitude
-			longitude
-
-		Output:
-			List<UberProduct>
-			(OR)
-			null 
-
-		Example API output:
-			 "products":[
-				{
-				"capacity":4,
-				"image":"http:\/\/d1a3f4spazzrp4.cloudfront.net\/car-types\/mono\/mono-uberx.png",
-				"display_name":"marky339@gmail.com",
-				"product_id":"a1111c8c-c720-46c3-8534-2fcdd730040d",
-				"description":"The low-cost Uber"
-				}]
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		Product Uber API call - The Products endpoint returns information about the Uber products offered at a given location 
+     * Input: 
+     *   	latitude
+	 *		longitude
+     * Output:
+     *   	List<UberProduct>
+	 * 		(OR)
+	 * 		null
 	 */
 	public static ArrayList<UberProduct> uberProductSearchAPICall(Double lat, Double lng){
 
@@ -73,36 +62,23 @@ public class UberService{
 		String output = Util.executeCurlCommand(UberService.API_KEY,query.toString(), outputFormat);
 		return parseUberProductJSON(output, lat, lng);
 	}
-
+	
+	
 	/*
-		Price Estimate Uber API call:
-			The Price Estimates endpoint returns an estimated price range for each product offered at a given location. 
-			The price estimate is provided as a formatted string with the full price range and the localized currency symbol.
-
-		Input:
-			start_latitude
-			start_longitude
-			end_latitude
-			end_longitude
-
-		Output:
-			List<UberPrice>
-			(OR)
-			null 
-
-		Example API output:
-			"prices":[{
-				"localized_display_name":"uberX",
-				"duration":3328,
-				"low_estimate":"68",
-				"display_name":"uberX",
-				"product_id":"a1111c8c-c720-46c3-8534-2fcdd730040d",
-				"distance":44.87,
-				"surge_multiplier":1.0,
-				"estimate":"$68-91",
-				"high_estimate":"91",
-				"currency_code":"USD"
-				}]
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		Price Estimate Uber API call - The Price Estimates endpoint returns an estimated price range for each product offered at a given location. 
+			The price estimate is provided as a formatted string with the full price range and the localized currency symbol. 
+     * Input: 
+     *   	start_latitude
+	 *		start_longitude
+	 *		end_latitude
+	 *		end_longitude
+     * Output:
+     *   	List<UberPrice>
+	 * 		(OR)
+	 * 		null
 	 */
 	public static Map<String,UberPrice> uberPriceEstimatesAPICall(Double startLatitude, 
 			Double startLongitude, Double endLatitude, Double endLongitude){
@@ -134,28 +110,20 @@ public class UberService{
 		return null;
 	}
 
-
+	
 	/*
-		Price Estimate Uber API call:
-			The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds.
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		Time Estimates Uber API call - The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds.
+     * Input: 
+     *   	start_latitude
+	 *		start_longitude
 
-		Input:
-			start_latitude
-			start_longitude
-
-		Output:
-			Map<String,Long>
-			(OR)
-			null 
-
-		Example API output:
-			"times":[
-				{
-				"localized_display_name":"uberX",
-				"estimate":101,
-				"display_name":"uberX",
-				"product_id":"a1111c8c-c720-46c3-8534-2fcdd730040d"
-				}
+     * Output:
+     *   	Map<String,Long>
+	 * 		(OR)
+	 * 		null
 	 */
 	public static Map<String,Long> uberTimeEstimatesAPICall(Double startLatitude, Double startLongitude){
 
@@ -183,27 +151,22 @@ public class UberService{
 		return null;
 	}
 
-
+	
 	/*
-		Promotions Uber API call:
-			The Promotions endpoint returns information about the promotion that will be available to a new user based on their activity's location
-		Input:
-			start_latitude
-			start_longitude
-			end_latitude
-			end_longitude
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		Promotions Uber API call - The Promotions endpoint returns information about the promotion that will be available to a new user based on their activity's location
+     * Input: 
+     *   	start_latitude
+	 *		start_longitude
+	 *		end_latitude
+	 *		end_longitude
 
-		Output:
-			String[] of size 3
-			(OR)
-			null 
-
-		Example API output:
-			{
-			  "display_text": "Free ride up to $30",
-			  "localized_value": "$30",
-			  "type": "trip_credit"
-			}
+     * Output:
+     *   	String[] of size 3
+	 * 		(OR)
+	 * 		null
 	 */
 	public static String[] uberPromotionsAPICall(Double startLatitude, 
 			Double startLongitude, Double endLatitude, Double endLongitude){
@@ -238,16 +201,16 @@ public class UberService{
 
 
 
-	/*Parse Uber Product API result: 
-		Ex: 
-			"products":[
-				{
-				"capacity":4,
-				"image":"http:\/\/d1a3f4spazzrp4.cloudfront.net\/car-types\/mono\/mono-uberx.png",
-				"display_name":"marky339@gmail.com",
-				"product_id":"a1111c8c-c720-46c3-8534-2fcdd730040d",
-				"description":"The low-cost Uber"
-			}]}
+	/*
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		parse JSON out of the UberProduct API call into List of UberProduct object 
+     * Input: 
+     *   	String
+     * Output:
+     *   	ArrayList of UberProduct object
+	 * 
 	 */
 	public static ArrayList<UberProduct> parseUberProductJSON(String s, Double lat, Double lng){
 
@@ -315,19 +278,15 @@ public class UberService{
 
 
 	/*
-		Parse Uber Price API result: 
-		Ex: 
-			{"prices":[
-				{
-				"localized_display_name":"uberX",
-				"duration":3328,
-				"low_estimate":"68",
-				"display_name":"uberX",
-				"product_id":"a1111c8c-c720-46c3-8534-2fcdd730040d",
-				"distance":44.87,"surge_multiplier":1.0,
-				"estimate":"$68-91","high_estimate":"91",
-				"currency_code":"USD"
-			}]}
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		parse JSON out of the UberPrice API call into Map of ProductID as key and UberPrice object as it's value 
+     * Input: 
+     *   	String
+     * Output:
+     *   	Map<String,UberPrice>
+	 * 
 	 */
 	public static Map<String,UberPrice> parseUberPriceJSON(String s){
 
@@ -411,16 +370,15 @@ public class UberService{
 
 
 	/*
-		Parse Uber Time API result: 
-		Ex: 
-			"times":[
-				{
-				"localized_display_name":"uberX",
-				"estimate":101,
-				"display_name":"uberX",
-				"product_id":"a1111c8c-c720-46c3-8534-2fcdd730040d"
-				}
-			}]}
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		parse JSON out of the UberTime API call into a Map of productId as key and time in seconds as it's value 
+     * Input: 
+     *   	String
+     * Output:
+     *   	Map<String,Long
+	 * 
 	 */
 	public static Map<String,Long> parseUberTimeJSON(String s){
 
@@ -470,13 +428,15 @@ public class UberService{
 	}
 
 	/*
-		Parse Uber Promotions API result: 
-		Ex: 
-			{
-			  "display_text": "Free ride up to $30",
-			  "localized_value": "$30",
-			  "type": "trip_credit"
-			}
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		parse JSON out of the UberPromotions API call into a String array of promotions 
+     * Input: 
+     *   	String
+     * Output:
+     *   	String[]
+	 * 
 	 */
 	public static String[] parseUberPromotionsJSON(String s){
 

@@ -12,16 +12,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 
 public class PlacesService{
 
 	private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
-	private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
-	private static final String TYPE_DETAILS = "/details";
-	private static final String TYPE_SEARCH = "/search";
 	private static final String TEXT_SEARCH = "/textsearch";
 	private static final String NEARBY_SEARCH = "/nearbysearch";
 	private static final String OUT_JSON = "/json";
@@ -30,7 +26,17 @@ public class PlacesService{
 	private static final String API_KEY = "AIzaSyBqxv1mclccpXKSqBRaVuev_F2FOXpMuC8";
 
 
-	//Text search service
+	/*
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		text search Places API call with mandatory parameters only - Returns places nearby to the provided location
+     * Input: 
+     *   	search string (Space separated input query)
+     * Output:
+     *   	ArrayList of Place object
+	 * 
+	 */
 	public static  ArrayList<Place> textSearchAPICall(String input) {
 
 		//Input check
@@ -38,10 +44,17 @@ public class PlacesService{
 			return null;
 		}
 
-		ArrayList<Place> resultList = null;
-		String query = input.replace(" ","+").trim();
-
+		//process input search query
+		String query = "";
+		if(input.contains(" ")){
+			query = input.replace(" ","+").trim();
+		}
+		if(!input.toLowerCase().contains("restaurant")){
+			query = query + "+restaurant";
+		}
+		
 		HttpURLConnection conn = null;
+		ArrayList<Place> resultList = null;
 		StringBuilder jsonResults = new StringBuilder();
 		try {
 			StringBuilder sb = new StringBuilder(PLACES_API_BASE);
@@ -50,8 +63,6 @@ public class PlacesService{
 			sb.append(OUT_JSON);
 			sb.append("?query=" + query);
 			sb.append("&key=" + API_KEY);
-
-			// System.out.println("formed URL :" + sb.toString());
 
 			URL url = new URL(sb.toString());
 			conn = (HttpURLConnection) url.openConnection();
@@ -80,38 +91,16 @@ public class PlacesService{
 	}
 
 
-
 	/*
-        Input:
-            lattitude
-            longitude
-            radius
-
-        Output:
-            "geometry" : {
-                "location" : {
-                   "lat" : -33.8599827,
-                   "lng" : 151.2021282
-                },
-                "viewport" : {
-                   "northeast" : {
-                      "lat" : -33.8552624,
-                      "lng" : 151.2031401
-                   },
-                   "southwest" : {
-                      "lat" : -33.8657895,
-                      "lng" : 151.2000123
-                   }
-                }
-             },
-             "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png",
-             "id" : "92f1bbd4ecab8e9add032bccee40a57a8dfd42b4",
-             "name" : "Barangaroo",
-             "place_id" : "ChIJ1ZL9NkGuEmsRUEkzFmh9AQU",
-             "reference" : "CpQBhAAAAIbacNxLx01ilJApMdLG22t1HAXh8bU6zj7wotdrU8-Uv7XyKZIHIgEy8uIc3NFAB8wgnDnBzoIbrnfzS8DFi3DMIBMhsbAPx6PjzzDsD4UE3sN5uW5FPqOD4Ti_-dhIBSdiVx0irScynqAzDBMNPlu9UM4kSsCQMyPB1Lwk1rq8FLN-GazbuIL9DCftxYrCZRIQQkqnCSNzHqhUQKQoHfBH2xoUHZDHcRAM8XOM5FaMngHuz3rePNk",
-             "scope" : "GOOGLE",
-             "types" : [ "locality", "political" ],
-             "vicinity" : "Barangaroo"
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		Nearby search Places API call with mandatory parameters only - Returns places nearby to the provided location
+     * Input: 
+     *   	Latitude, Longitude and radius of the search
+     * Output:
+     *   	ArrayList of Place object
+	 * 
 	 */
 	public static ArrayList<Place> nearbySearchAPICall(Double lat, Double lng, int radius) {
 
@@ -155,37 +144,79 @@ public class PlacesService{
 		//Parse JSON and return as List<Place>
 		return parseNearbySearchJSON(jsonResults.toString());
 	}
-
-
-
-	//parseTextSearchJSON
+	
 	/*
-        {
-         "geometry" : {
-            "location" : {
-               "lat" : -33.8599827,
-               "lng" : 151.2021282
-            },
-            "viewport" : {
-               "northeast" : {
-                  "lat" : -33.8552624,
-                  "lng" : 151.2031401
-               },
-               "southwest" : {
-                  "lat" : -33.8657895,
-                  "lng" : 151.2000123
-               }
-            }
-         },
-         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png",
-         "id" : "92f1bbd4ecab8e9add032bccee40a57a8dfd42b4",
-         "name" : "Barangaroo",
-         "place_id" : "ChIJ1ZL9NkGuEmsRUEkzFmh9AQU",
-         "reference" : "CpQBhQAAABLaIQhdFvUDoBox7zWCkGyvq2_qUwxujd1Erypqy4Tt6c8t6mkd-iR-e1oUt16Ii2Kw8ClpbZdsN-UCrDnHH36-z69eOrHkvjj4I5G5PZgsMXQvOW0jaK2xabzvZkE9FyprXNc1hcq_QqFMv30drDxttIz8Ot1tEny7Ouu25_mOMfUoWTuX0bWoiw590a-O8BIQs_KXtGYf98W_OWhe-WXnCRoUlQMeyylctWziYKoI6etzwzL4EEA",
-         "scope" : "GOOGLE",
-         "types" : [ "locality", "political" ],
-         "vicinity" : "Barangaroo"
-      }
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		Nearby search Places API call with mandatory parameters & type list (Categories that needs 
+	 * 		to be returned - optional) - Returns places nearby to the provided location
+     * Input: 
+     *   	Latitude, Longitude, radius and type list of the search
+     * Output:
+     *   	ArrayList of Place object
+	 * 
+	 */
+	public static ArrayList<Place> nearbySearchAPICall(Double lat, Double lng, Integer radius, ArrayList<String> typeList) {
+
+		//Input check - return null when the input is null
+		if(lat == null || lng == null || radius == null || typeList == null){
+			return null;
+		}
+
+		HttpURLConnection conn = null;
+		StringBuilder jsonResults = new StringBuilder();
+		try {
+			StringBuilder sb = new StringBuilder(PLACES_API_BASE);
+			sb.append(NEARBY_SEARCH);
+			sb.append(OUT_JSON);
+			sb.append("?");
+			sb.append("location=" + String.valueOf(lat) + "," + String.valueOf(lng));
+			sb.append("&radius=" + String.valueOf(radius));
+			
+			//Append types to the query if the type list is non-empty
+			if(!typeList.isEmpty()){
+				sb.append("&types=");
+				for(int i = 0;i < typeList.size() && typeList.get(i) != null;i++){
+					sb.append(typeList.get(i));
+					if(i < typeList.size()-1){
+						sb.append("|");
+					}
+				}
+			}
+			
+			sb.append("&key=" + API_KEY);
+			URL url = new URL(sb.toString());
+			conn = (HttpURLConnection) url.openConnection();
+			InputStreamReader in = new InputStreamReader(conn.getInputStream());
+
+			int read;
+			char[] buff = new char[1024];
+			while ((read = in.read(buff)) != -1) {
+				jsonResults.append(buff, 0, read);
+			}
+		} catch (MalformedURLException e) {
+			return null;
+		} catch (IOException e) {
+			return null;
+		} finally {
+			if (conn != null) {
+				conn.disconnect();
+			}
+		}
+		//Parse JSON and return as List<Place>
+		return parseNearbySearchJSON(jsonResults.toString());
+	}
+
+	 /* @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		parse JSON out of the nearby search API call into List of Place object 
+     * Input: 
+     *   	String
+     * Output:
+     *   	ArrayList of Place object
+	 * 
 	 */
 	public static ArrayList<Place> parseTextSearchJSON(String s){
 		ArrayList<Place> placeList = null;
@@ -280,7 +311,17 @@ public class PlacesService{
 	}
 
 
-	//parseTextSearchJSON
+	/*
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Description: 
+	 * 		parse JSON out of the text search API call into List of Place object 
+     * Input: 
+     *   	String
+     * Output:
+     *   	ArrayList of Place object
+	 * 
+	 */
 	public static ArrayList<Place> parseNearbySearchJSON(String s){
 
 		//Input check - return null when s is null or empty()
