@@ -15,7 +15,11 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 
 import java.util.ArrayList;
+
 import ub.cse636.project.Place;
+import ub.cse636.project.util.Util;
+import ub.cse636.project.util.Util.API;
+
 import java.util.Iterator;
 
 /**
@@ -42,10 +46,15 @@ public class YelpAPI {
 	 * Update OAuth credentials below from the Yelp Developers API site:
 	 * http://www.yelp.com/developers/getting_started/api_access
 	 */
-	private static final String CONSUMER_KEY = "LnEHXdAnHU6CKhJOxR-ZJg";
-	private static final String CONSUMER_SECRET = "B7hKXDEySTIlmteGsKGI3tF9tNE";
-	private static final String TOKEN = "wrsIOP1Q8_wOWVEKR-i-iuJVwHcDSoYG";
-	private static final String TOKEN_SECRET = "1XmI_Rn2kTe3OrVk_qmmldIiDhU";
+//	private static final String CONSUMER_KEY = "LnEHXdAnHU6CKhJOxR-ZJg";
+//	private static final String CONSUMER_SECRET = "B7hKXDEySTIlmteGsKGI3tF9tNE";
+//	private static final String TOKEN = "wrsIOP1Q8_wOWVEKR-i-iuJVwHcDSoYG";
+//	private static final String TOKEN_SECRET = "1XmI_Rn2kTe3OrVk_qmmldIiDhU";
+	
+	private static final String CONSUMER_KEY = Util.getAPIKeyPropFile(API.YELP_CONSUMER_KEY);
+	private static final String CONSUMER_SECRET = Util.getAPIKeyPropFile(API.YELP_CONSUMER_SECRET);
+	private static final String TOKEN = Util.getAPIKeyPropFile(API.YELP_TOKEN);
+	private static final String TOKEN_SECRET = Util.getAPIKeyPropFile(API.YELP_TOKEN_SECRET);
 
 	OAuthService service;
 	Token accessToken;

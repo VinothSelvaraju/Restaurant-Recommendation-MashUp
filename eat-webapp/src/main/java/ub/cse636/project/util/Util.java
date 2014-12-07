@@ -2,7 +2,7 @@ package ub.cse636.project.util;
 
 import java.util.ArrayList;
 import java.util.Map;
-
+import java.util.Properties;
 import java.lang.StringBuilder;
 import java.lang.ProcessBuilder;
 import java.io.BufferedReader;
@@ -15,6 +15,12 @@ import ub.cse636.project.UberProduct;
 import ub.cse636.project.UberPrice;
 
 public class Util{
+	
+	//API used as constants
+	public enum API{
+		UBER_KEY,YELP_CONSUMER_KEY,YELP_CONSUMER_SECRET,YELP_TOKEN, 
+		YELP_TOKEN_SECRET,PLACES_KEY,MAPS_KEY
+	}
 
 	//Printing the content of Yelp/Google Place API - query search result list
 	public static void printPlaceList(ArrayList<Place> list){
@@ -57,9 +63,7 @@ public class Util{
 	public static void printUberPriceEstimateMap(Map<String, UberPrice> map){
 		if(map != null && !map.isEmpty()){
 			for (Map.Entry<String, UberPrice> entry : map.entrySet()) {
-	   			String key = entry.getKey();
-	   		
-	    		UberPrice value = entry.getValue();
+	   			UberPrice value = entry.getValue();
 	    		if(value != null){
 	    			System.out.println(value.getProductId());
 					System.out.println(value.getDisplayName());
@@ -151,6 +155,37 @@ public class Util{
 		    Thread.sleep(1000);                 //1000 milliseconds is one second.
 		} catch(InterruptedException ex) {
 		    Thread.currentThread().interrupt();
+		}
+	}
+	public static String getAPIKeyPropFile(API apiName) {
+		 
+		Properties prop = new Properties();
+		String propFileName = "config.properties";
+		
+		try{
+//			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
+			InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(propFileName);
+			prop.load(inputStream);
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+		
+		switch (apiName) {
+        case UBER_KEY:  
+        	return prop.getProperty("UBER_KEY");
+        case YELP_CONSUMER_KEY:  
+        	return prop.getProperty("YELP_CONSUMER_KEY");
+        case YELP_CONSUMER_SECRET:  
+        	return prop.getProperty("YELP_CONSUMER_SECRET");
+        case YELP_TOKEN:  
+        	return prop.getProperty("YELP_TOKEN");
+        case YELP_TOKEN_SECRET:  
+        	return prop.getProperty("YELP_TOKEN_SECRET");
+        case PLACES_KEY:  
+        	return prop.getProperty("PLACES_KEY");
+        default:
+        	return null;
 		}
 	}
 }

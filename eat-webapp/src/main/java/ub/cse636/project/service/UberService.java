@@ -2,14 +2,6 @@ package  ub.cse636.project.service;
 
 import java.lang.StringBuilder;
 import java.lang.Exception;
-import java.lang.ProcessBuilder;
-import java.lang.Runtime;
-import java.lang.ArrayIndexOutOfBoundsException;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
@@ -21,12 +13,13 @@ import org.json.simple.parser.ParseException;
 
 import  ub.cse636.project.UberProduct;
 import  ub.cse636.project.util.Util;
+import ub.cse636.project.util.Util.API;
 import  ub.cse636.project.UberPrice;
 
 
 public class UberService{
 
-	private static final String API_KEY = "ottJav45V1ZXaH0sH8bgMVaYc_Qzkc95Ee0LqhBH";
+	private static final String UBER_KEY = Util.getAPIKeyPropFile(API.UBER_KEY);
 
 	/*
 	 * @author: Vinoth Selvaraju
@@ -59,7 +52,7 @@ public class UberService{
 		query.append("longitude=");
 		query.append(lng);
 
-		String output = Util.executeCurlCommand(UberService.API_KEY,query.toString(), outputFormat);
+		String output = Util.executeCurlCommand(UberService.UBER_KEY,query.toString(), outputFormat);
 		return parseUberProductJSON(output, lat, lng);
 	}
 	
@@ -103,7 +96,7 @@ public class UberService{
 			query.append("end_longitude=");
 			query.append(endLongitude);
 
-			String output = Util.executeCurlCommand(UberService.API_KEY,query.toString(), outputFormat);
+			String output = Util.executeCurlCommand(UberService.UBER_KEY,query.toString(), outputFormat);
 
 			return parseUberPriceJSON(output);
 		}
@@ -144,7 +137,7 @@ public class UberService{
 			// query.append("product_id=");
 			// query.append(productId);
 
-			String output = Util.executeCurlCommand(UberService.API_KEY,query.toString(), outputFormat);
+			String output = Util.executeCurlCommand(UberService.UBER_KEY,query.toString(), outputFormat);
 
 			return parseUberTimeJSON(output);
 		}
@@ -192,7 +185,7 @@ public class UberService{
 			query.append("end_longitude=");
 			query.append(endLongitude);
 
-			String output = Util.executeCurlCommand(UberService.API_KEY,query.toString(), outputFormat);
+			String output = Util.executeCurlCommand(UberService.UBER_KEY,query.toString(), outputFormat);
 
 			return parseUberPromotionsJSON(output);
 		}

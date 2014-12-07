@@ -6,6 +6,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import ub.cse636.project.Place;
+import ub.cse636.project.util.Util;
+import ub.cse636.project.util.Util.API;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,8 +25,7 @@ public class PlacesService{
 	private static final String OUT_JSON = "/json";
 
 	// KEY!
-	private static final String API_KEY = "AIzaSyBqxv1mclccpXKSqBRaVuev_F2FOXpMuC8";
-
+	private static final String PLCAES_KEY = Util.getAPIKeyPropFile(API.PLACES_KEY);
 
 	/*
 	 * @author: Vinoth Selvaraju
@@ -62,7 +63,7 @@ public class PlacesService{
 			sb.append(TEXT_SEARCH);
 			sb.append(OUT_JSON);
 			sb.append("?query=" + query);
-			sb.append("&key=" + API_KEY);
+			sb.append("&key=" + PLCAES_KEY);
 
 			URL url = new URL(sb.toString());
 			conn = (HttpURLConnection) url.openConnection();
@@ -118,7 +119,7 @@ public class PlacesService{
 			sb.append("?");
 			sb.append("location=" + String.valueOf(lat) + "," + String.valueOf(lng));
 			sb.append("&radius=" + String.valueOf(radius));
-			sb.append("&key=" + API_KEY);
+			sb.append("&key=" + PLCAES_KEY);
 			// sb.append("&keyword=" + URLEncoder.encode(keyword, "utf8"));
 
 
@@ -185,7 +186,7 @@ public class PlacesService{
 				}
 			}
 			
-			sb.append("&key=" + API_KEY);
+			sb.append("&key=" + PLCAES_KEY);
 			URL url = new URL(sb.toString());
 			conn = (HttpURLConnection) url.openConnection();
 			InputStreamReader in = new InputStreamReader(conn.getInputStream());
