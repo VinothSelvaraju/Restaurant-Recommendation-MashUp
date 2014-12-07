@@ -27,7 +27,7 @@ table {
 }
 
 #map-canvas {
-	width: 800px;
+	width: 680px;
 	height: 800px;
 }
 
@@ -129,6 +129,11 @@ table {
 			   $('#tab2').html("<address> <strong>"+detail[0]+"</strong><br>"+detail[1]+"<br> Rating: "+ detail[2]+"</address>");
 			   $('#tab3').empty();
 			   $('#tab4').empty();
+			   if( productSize == 0)
+			   {
+				   $('#tab3').append("<div><h3>No Uber Service for this service</h3></div>");
+				  // $('#tab4').append("<div><h3>No Uber Service for this service</h3></div>");
+			   }
 			   for(i=0; i<productSize; i++)
 			   {
 				     index = '#prod'+i;
@@ -175,10 +180,19 @@ table {
 								dataType:"json",
 									success: function(data)
 									{
-										if(data.Promotions.length)
+										if(data.Promotions !== null)
 										{
-												$('#tab4').append("<div class='border-row'><div class='box-content left'>Name: "+data.Promotions[0]+"<br> Value: "+data.Promotions[1]+"<br> Type: "+data.Promotions[2]+"</div></div>");
+											if(data.Promotions.length)
+											{
+													$('#tab4').append("<div class='border-row'><div class='box-content left'>Name: "+data.Promotions[0]+"<br> Value: "+data.Promotions[1]+"<br> Type: "+data.Promotions[2]+"</div></div>");
+											}
 										}
+										else
+										{
+											$('#tab4').empty();
+											$('#tab4').append("<div><h3>No Uber Service for this service</h3></div>");
+										}
+										
 									},
 							
 								async:false
@@ -338,7 +352,7 @@ function calcRoute(travel) {
 	google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>-->
 <link
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
 	rel="stylesheet">

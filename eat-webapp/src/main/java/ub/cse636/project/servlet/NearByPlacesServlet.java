@@ -12,22 +12,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ub.cse636.project.Place;
 import ub.cse636.project.UberPrice;
+import ub.cse636.project.service.PlacesService;
 import ub.cse636.project.service.UberService;
 
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class PromotionServlet
+ * Servlet implementation class NearByPlacesServlet
  */
-@WebServlet("/PromotionServlet")
-public class PromotionServlet extends HttpServlet {
+@WebServlet("/NearByPlacesServlet")
+public class NearByPlacesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PromotionServlet() {
+    public NearByPlacesServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,23 +47,18 @@ public class PromotionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		PrintWriter out = response.getWriter();
-		String[] promotions;
 		Gson gson = new Gson();
+		ArrayList<Place> result = new ArrayList<Place>();
 		
-		Double sl = Double.parseDouble(request.getParameter("sl").toString()); 
-		Double sln = Double.parseDouble(request.getParameter("sln").toString()); 
 		Double dl = Double.parseDouble(request.getParameter("dl").toString()); 
 		Double dln = Double.parseDouble(request.getParameter("dln").toString());
-		//System.out.println("Price Servlet "+sl+" "+sln+" "+dl+" "+dln);
+		int radius = Integer.parseInt(request.getParameter("radius").toString());
+
+		result = PlacesService.nearbySearchAPICall(dl, dln, radius);
 		
-		promotions = UberService.uberPromotionsAPICall(sl, sln, dl, dln);
-		
-		
-		String promotion = gson.toJson(promotions);
-		if(promotion == null)
-			System.out.println("promotion null");
-		//System.out.println(promotion);
-		out.println("{\"Promotions\":"+promotion+"}");
+		System.out.println("NearByPlaces "+result.size());
+		String message = gson.toJson(result);
+		out.println("{\"NearByPlaces\":"+message+"}");
 	}
 
 }

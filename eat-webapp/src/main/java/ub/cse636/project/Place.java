@@ -100,4 +100,9 @@ public class Place{
 	public ArrayList<String> getTypeList(){
 		return typeList;
 	}
+	
+	public void setUpperCase()
+	{
+		this.name = this.name.toUpperCase();
+	}
 }

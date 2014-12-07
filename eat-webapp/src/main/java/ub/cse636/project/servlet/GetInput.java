@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ub.cse636.project.service.Ranking;
+import ub.cse636.project.service.PlacesService;
 import ub.cse636.project.Place;
 import ub.cse636.project.UberProduct;
 import ub.cse636.project.service.UberService;
@@ -56,6 +58,7 @@ public class GetInput extends HttpServlet {
 		// TODO Auto-generated method stub
 		String input = request.getParameter("query");
 		String coord = request.getParameter("coordName").toString();
+		ArrayList<Place> result = new ArrayList<Place>();
 		
 		char[] temp = coord.toCharArray();
 		StringBuilder res = new StringBuilder();
@@ -86,12 +89,18 @@ public class GetInput extends HttpServlet {
 		
 		if( place != "")
 			currentPlace = place;
-
+		
+		String inputGoogle = input+" restaurant in "+currentPlace;
+		
 		YelpApiUtil yelp = new YelpApiUtil(input, currentPlace);
-		ArrayList<Place> places = yelp.start();
-		request.setAttribute("places", places);
+		ArrayList<Place> yelpPlaces = yelp.start();
+		ArrayList<Place> googlePlaces = PlacesService.textSearchAPICall(inputGoogle);
+		result = Ranking.getRankedResults(yelpPlaces, googlePlaces);
+		request.setAttribute("places", result);
 		
 		ArrayList<UberProduct> products = UberService.uberProductSearchAPICall(lat, lng);
+		if(products == null)
+			products = new ArrayList<UberProduct>();
 		request.setAttribute("products", products);
 		
 		request.setAttribute("latitude", lat);
