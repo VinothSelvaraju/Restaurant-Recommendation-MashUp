@@ -16,13 +16,19 @@ import ub.cse636.project.UberPrice;
 
 public class Util{
 	
-	//API used as constants
+	/*
+	 * @author: Vinoth Selvaraju
+	 * API used as constants
+	*/
 	public enum API{
 		UBER_KEY,YELP_CONSUMER_KEY,YELP_CONSUMER_SECRET,YELP_TOKEN, 
 		YELP_TOKEN_SECRET,PLACES_KEY,MAPS_KEY
 	}
-
-	//Printing the content of Yelp/Google Place API - query search result list
+	
+	/*
+	 * @author: Vinoth Selvaraju
+	 * Printing the content of Yelp/Google Place API - query search result list
+	*/
 	public static void printPlaceList(ArrayList<Place> list){
 		System.out.println("PRINTING PLACES LIST: ");
 		if(list != null && !list.isEmpty()){
@@ -40,8 +46,11 @@ public class Util{
 			}
 		}
 	}
-
-	//Printing the content of Uber API - product search result list
+	
+	/*
+	 * @author: Vinoth Selvaraju
+	 * Printing the content of Uber API - product search result list
+	*/
 	public static void printUberProdList(ArrayList<UberProduct> list){
 		if(list != null && !list.isEmpty()){
 			System.out.println("PRINTING UBER PRODUCT LIST: ");
@@ -58,8 +67,11 @@ public class Util{
 		}
 	}
 
-
-	//Printing the content of Uber API - prices estimates result map
+	
+	/*
+	 * @author: Vinoth Selvaraju
+	 * Printing the content of Uber API - prices estimates result map
+	*/
 	public static void printUberPriceEstimateMap(Map<String, UberPrice> map){
 		if(map != null && !map.isEmpty()){
 			for (Map.Entry<String, UberPrice> entry : map.entrySet()) {
@@ -79,8 +91,11 @@ public class Util{
 			}
 		}
 	}
-
-	//Printing the content of Uber API - time estimates result map
+	
+	/*
+	 * @author: Vinoth Selvaraju
+	 * Printing the content of Uber API - time estimates result map
+	*/
 	public static void printUberTimeEstimateMap(Map<String, Long> map){
 		if(map != null && !map.isEmpty()){
 			for (Map.Entry<String, Long> entry : map.entrySet()) {
@@ -100,14 +115,15 @@ public class Util{
 
 
 	/*
-		Curl command execution
-		Input - API key; Query URL
-		Output - String
-
-		Ex - Uber API search:
-			curl -H 'Authorization: Token ottJav45V1ZXaH0sH8bgMVaYc_Qzkc95Ee0LqhBH' \
-			'https://api.uber.com/v1/products?latitude=37.7759792&longitude=-122.41823'
-			 https://api.uber.com/v1/products?latitude=37.7759792longitude=-122.41823
+	 * @author: Vinoth Selvaraju
+	 * 
+	 * Curl command execution	
+	 * Input - API key; Query URL
+	 * Output - String
+	 * Ex - Uber API search:
+	 *	curl -H 'Authorization: Token ottJav45V1ZXaH0sH8bgMVaYc_Qzkc95Ee0LqhBH' \
+	 *		'https://api.uber.com/v1/products?latitude=37.7759792&longitude=-122.41823'
+	 *		 https://api.uber.com/v1/products?latitude=37.7759792longitude=-122.41823
 	*/
 	public static String executeCurlCommand(String apiKey, String query, String outputFormat){
 		
@@ -149,7 +165,11 @@ public class Util{
 		}
 		return null;
 	}
-
+	
+	/*
+	 * @author: Vinoth Selvaraju
+	 * Wait for 1000 ms
+	*/
 	public static void waitForSecond(){
 		try {
 		    Thread.sleep(1000);                 //1000 milliseconds is one second.
@@ -157,13 +177,17 @@ public class Util{
 		    Thread.currentThread().interrupt();
 		}
 	}
+	
+	/*
+	 * @author: Vinoth Selvaraju
+	 * Retreive API key from properties file
+	*/
 	public static String getAPIKeyPropFile(API apiName) {
 		 
 		Properties prop = new Properties();
 		String propFileName = "config.properties";
 		
 		try{
-//			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
 			InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(propFileName);
 			prop.load(inputStream);
 		}

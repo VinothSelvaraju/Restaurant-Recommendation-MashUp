@@ -82,6 +82,9 @@ public class GetInput extends HttpServlet {
 		Double lat = Double.parseDouble(coordinates[0]);
 		Double lng = Double.parseDouble(coordinates[1]);
 		
+//		Double lat = 37.29569626;
+//		Double lng = -121.9272079;
+		
 		System.out.println("GET INPUT "+input+" "+coord+" "+lat+" "+lng);
 		
 		String currentPlace = request.getParameter("coordPlace");

@@ -11,7 +11,7 @@ Pre-requisites:
 Steps to build and deploy the application on local tomcat server:
  1. Navigate to the project folder named eat-webapp
  2. Clean, compile, build and deploy - mvn clean package tomcat7:deploy
- 3. Clean, compile, build and deploy - mvn clean package tomcat7:reploy
+ 3. Clean, compile, build and deploy - mvn clean package tomcat7:redeploy
 
 Other useful maven goals:
  1. Compile and package the jar file - mvn package

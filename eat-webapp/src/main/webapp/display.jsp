@@ -105,8 +105,13 @@ table {
 		ArrayList<Place> places = (ArrayList<Place>) request.getAttribute("places");
 		ArrayList<UberProduct> products = (ArrayList<UberProduct>) request.getAttribute("products");
 		Map<String,UberPrice> uberProductPriceEstMap = new HashMap<String,UberPrice>();
-		Double latitude =  (Double) request.getAttribute("latitude");
-		Double longitude =  (Double) request.getAttribute("longitude");
+		/* Double latitude =  (Double) request.getAttribute("latitude");
+		Double longitude =  (Double) request.getAttribute("longitude"); */
+		//Latitude: 37.29569626. Longitude: -121.9272079.
+		
+		Double latitude = 37.29569626;
+		Double longitude = -121.9272079;
+		
     %>
 
 <script type = "text/javascript">
@@ -222,7 +227,7 @@ table {
 											{
 												$.each(data.NearByPlaces, function(i,data)
 												{
-													$('#tab5').append("<div class='border-row'><div class='box-content left'>Name: "+data.name+"<br> Address: "+data.address+"<br> Type: "+data.typeList+"</div></div>");
+													$('#tab5').append("<div class='border-row'><div class='box-content left'>Name: "+data.name+"<br> Rating: "+data.rating + "</div></div>");
 												});
 											}
 										}
@@ -361,7 +366,7 @@ function calcRoute(travel) {
 	function initialize() 
 	{
 		//alert("HI");	
-		
+		<%-- alert(<%= products.size() %>); --%>
 		haightAshbury[0] = new google.maps.LatLng(<%= places.get(0).getLattitude() %>, <%= places.get(0).getLongitude() %>); 
 		var mapOptions = {
 		          center: haightAshbury[0],
