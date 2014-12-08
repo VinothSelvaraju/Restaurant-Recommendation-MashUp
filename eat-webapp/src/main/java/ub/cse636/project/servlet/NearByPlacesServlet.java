@@ -49,14 +49,33 @@ public class NearByPlacesServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		Gson gson = new Gson();
 		ArrayList<Place> result = new ArrayList<Place>();
+		ArrayList<String> typeList = new ArrayList<String>();
 		
 		Double dl = Double.parseDouble(request.getParameter("dl").toString()); 
 		Double dln = Double.parseDouble(request.getParameter("dln").toString());
 		int radius = Integer.parseInt(request.getParameter("radius").toString());
-
-		result = PlacesService.nearbySearchAPICall(dl, dln, radius);
+		String type = request.getParameter("type").toString();
+		String[] temp;
+		
+		if(type.contains("|"))
+		{
+			temp = type.split("|");
+			for(String x : temp)
+			{
+					typeList.add(x);
+			}
+			result = PlacesService.nearbySearchAPICall(dl, dln, radius, typeList);
+		}
+		else
+			result = PlacesService.nearbySearchAPICall(dl, dln, radius);
+		
 		
 		System.out.println("NearByPlaces "+result.size());
+		for(Place t : result)
+		{
+			System.out.println(t.getName());
+			
+		}
 		String message = gson.toJson(result);
 		out.println("{\"NearByPlaces\":"+message+"}");
 	}

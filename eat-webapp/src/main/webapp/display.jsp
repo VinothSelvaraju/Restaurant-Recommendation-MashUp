@@ -28,7 +28,7 @@ table {
 
 #map-canvas {
 	width: 680px;
-	height: 800px;
+	height: 700px;
 }
 
 #listing {
@@ -40,6 +40,11 @@ table {
 	top: 0px;
 	cursor: pointer;
 	overflow-x: hidden;
+}
+.footer{
+ height:40px;
+ margin-top:-20px;
+ background-color: #f5f5f5;
 }
 </style>
 
@@ -107,9 +112,11 @@ table {
 <script type = "text/javascript">
 	
 	var detail = [];
+	var type;
 	var prodDetails = [];
 	var mbr_index;
 	var index;
+	var tindex;
 	var index1;
 	var radioValue;
 	var travel;
@@ -200,6 +207,38 @@ table {
 			   
 			   //Ends
 			   
+			    //NearByPlace AJAX Call
+			   
+			 				$.ajax
+							({
+								type: "POST",
+								url: "NearByPlacesServlet?dl="+detail[4]+"&dln="+detail[5]+"&radius=5"+"&type="+type,
+								dataType:"json",
+									success: function(data)
+									{
+										if(data.NearByPlaces !== null)
+										{
+											if(data.NearByPlaces.length)
+											{
+												$.each(data.NearByPlaces, function(i,data)
+												{
+													$('#tab5').append("<div class='border-row'><div class='box-content left'>Name: "+data.name+"<br> Address: "+data.address+"<br> Type: "+data.typeList+"</div></div>");
+												});
+											}
+										}
+										else
+										{
+											$('#tab5').empty();
+											$('#tab5').append("<div><h3>No NearBy Places</h3></div>");
+										}
+										
+									},
+							
+								async:false
+							});	
+			   
+			   //Ends
+			   
 			   
 			   
 			}); 
@@ -212,8 +251,9 @@ table {
 		$items.find('a').click(function () { 
 		     mbr_index = $items.index($(this).parent()); // one based index
 		     index = '#ind'+mbr_index;
+		     tindex = '#type'+mbr_index;
 		     detail = $(index).html().split("|");
-		    		
+		     type = $(tindex).html();		
 		     $('#myModal').modal('show');
 		     $("#res-name").text(detail[0]);
 		     $('.nav-tabs a[href="#tab1').tab('show');
@@ -321,7 +361,7 @@ function calcRoute(travel) {
 	function initialize() 
 	{
 		//alert("HI");	
-		alert("Product size : "+<%= products.size() %>)
+		
 		haightAshbury[0] = new google.maps.LatLng(<%= places.get(0).getLattitude() %>, <%= places.get(0).getLongitude() %>); 
 		var mapOptions = {
 		          center: haightAshbury[0],
@@ -365,15 +405,18 @@ function calcRoute(travel) {
  
   
   <div class="container">
-    <div class="row">
-        <div class="col-md-7" style="margin-top: 30px;">
-		<div id="map-canvas">
-		</div>
-        </div>
-        <div class="col-md-5">
+  	
+  	<div class="form-group">
+					<div class="col-sm-offset-6 col-sm-6">
+						<h3>Result</h3>
+					</div>
+	</div>
+	<div class="form-group">
+    <!-- <div class="row" style="border: 2px black;"> -->
+        
+        <div class="col-md-5" style="height: auto; max-height: 700px; overflow-x: hidden;">
         
         <%
-		out.println("<p>Top Restaurants</p>");
 		for(int i = 0; i < places.size(); i++) 
 		{
 			temp = places.get(i);
@@ -387,7 +430,16 @@ function calcRoute(travel) {
 		{
 			temp = places.get(i);
 			String details = temp.getName()+"|"+temp.getAddress()+"|"+temp.getRating()+"|"+temp.getReviewCount()+"|"+temp.getLattitude()+"|"+temp.getLongitude();
+			String typeList="", bar="";
+			
 			out.println("<div id='ind"+i+"' style='display: none'>"+details+"</div> ");
+			
+			for(int j=0; j<temp.getTypeList().size(); i++)
+			{
+				typeList = bar+temp.getTypeList().get(i);
+				bar="|";
+			}
+			out.println("<div id='type"+i+"' style='display: none'>"+typeList+"</div> ");
 		}
 		
 	    for(int i = 0; i < products.size(); i++) 
@@ -399,8 +451,16 @@ function calcRoute(travel) {
 		} 
 		%>
 		</div>
+		<div class="col-md-7" style="height: 600px; max-height: 750px;">
+		<div id="map-canvas">
+		</div>
+        </div>
 	</div>
 </div> 
+
+<div class="footer">
+<div class="container">Copyright (c) 2014?</div>
+</div>
 
 <!-- Pop up Menu Starts -->
 
